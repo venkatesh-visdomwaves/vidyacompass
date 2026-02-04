@@ -1,0 +1,14 @@
+/* Footer Component Specific Styling */
+
+footer {
+    letter-spacing: 0.025em;
+}
+
+/* Custom underline animation for footer links */
+.group:hover span {
+    width: 100%;
+}
+
+footer a {
+    text-decoration: none;
+}

@@ -1,0 +1,97 @@
+/* Hero Area specific animations */
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) scale(1.0); }
+    50% { transform: translateY(-20px) scale(1.05); }
+}
+
+@keyframes sun-glow {
+    0%, 100% { transform: scale(1); opacity: 0.6; filter: blur(40px); }
+    50% { transform: scale(1.2); opacity: 0.8; filter: blur(60px); }
+}
+
+@keyframes rays-drift {
+    0% { transform: rotate(0deg) scale(1); }
+    100% { transform: rotate(360deg) scale(1.1); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes sunrise {
+    0% { transform: translateY(100px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-sun-glow {
+    animation: sun-glow 8s ease-in-out infinite;
+}
+
+.animate-rays-drift {
+    animation: rays-drift 30s linear infinite;
+}
+
+.animate-sunrise {
+    animation: sunrise 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Premium Glassmorphism */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.glass-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 200%; height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        transparent
+    );
+    animation: shimmer 5s infinite;
+}
+
+/* Updated nature scene background */
+#home {
+    background: radial-gradient(circle at 70% 30%, #4a5568 0%, #0f172a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Light beam effect */
+.light-beam {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-conic-gradient(
+        from 0deg,
+        transparent 0deg 10deg,
+        rgba(255, 255, 255, 0.02) 15deg 20deg
+    );
+    pointer-events: none;
+    z-index: 1;
+}

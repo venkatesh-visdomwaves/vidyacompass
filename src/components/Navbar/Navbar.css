@@ -1,0 +1,44 @@
+/* Navbar specific styles */
+.animate-spin-slow {
+    animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Glassmorphism utility if needed */
+.backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Indian Tri-color Hover Effects */
+.group\/logo:hover .logo-text-hover {
+    background-image: linear-gradient(to right, #FF9933, #FFFFFF, #138808);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.group\/logo:hover .tagline-text-hover {
+    color: #138808;
+}
+
+.navbar-button-indian:hover {
+    background: linear-gradient(135deg, #FF9933 0%, #FFFFFF 50%, #138808 100%) !important;
+    color: #000 !important;
+    /* Black text on tri-color background for readability */
+}
+
+@media (max-width: 768px) {
+    .group\/logo:hover .logo-text-hover {
+        background-image: none;
+        color: #FF9933;
+    }
+}

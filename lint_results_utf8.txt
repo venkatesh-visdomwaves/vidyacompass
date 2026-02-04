@@ -1,0 +1,118 @@
+﻿
+> studentcompass@0.0.0 lint
+> eslint .
+
+
+C:\vidyacompasswebsite\studentcompass\src\components\About\AboutSection.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\vidyacompasswebsite\studentcompass\src\components\Auth\AuthModal.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\vidyacompasswebsite\studentcompass\src\components\Challenges\ChallengesSection.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\vidyacompasswebsite\studentcompass\src\components\Companion\AICompanion.jsx
+   1:38  error    'useCallback' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               no-unused-vars
+   2:10  error    'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    no-unused-vars
+  33:17  error    Error: Cannot access variable before it is declared
+
+`processCommand` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  31 |                 const transcript = event.results[0][0].transcript.toLowerCase();
+  32 |                 setLastCommand(transcript);
+> 33 |                 processCommand(transcript);
+     |                 ^^^^^^^^^^^^^^ `processCommand` accessed before it is declared
+  34 |                 setIsListening(false);
+  35 |             };
+  36 |
+
+  57 |
+  58 |     // Command Processor: Navigation and Interaction
+> 59 |     const processCommand = (cmd) => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 60 |         if (cmd.includes("home") || cmd.includes("modati") || cmd.includes("start")) {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 61 |             window.location.hash = "#home";
+     ΓÇª
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 83 |         }
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 84 |     };
+     | ^^^^^^^ `processCommand` is declared here
+  85 |
+  86 |     const toggleListening = () => {
+  87 |         if (isListening) {  react-hooks/immutability
+  40:8   warning  React Hook useEffect has a missing dependency: 'processCommand'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                react-hooks/exhaustive-deps
+
+C:\vidyacompasswebsite\studentcompass\src\components\Contact\ContactSection.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\vidyacompasswebsite\studentcompass\src\components\Features\FeaturesSection.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\vidyacompasswebsite\studentcompass\src\components\Hero\Compass\Compass.jsx
+   2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u               no-unused-vars
+   8:12  error  'lastPos' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+  22:23  error  'resetTimer' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\vidyacompasswebsite\studentcompass\src\components\Hero\HeroSection.jsx
+   2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      no-unused-vars
+  12:11  error  'titleChars' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         no-unused-vars
+  13:11  error  'subTitleChars' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      no-unused-vars
+  44:41  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  42 |                             className="absolute bg-white rounded-full w-1 h-1"
+  43 |                             style={{
+> 44 |                                 top: `${Math.random() * 100}%`,
+     |                                         ^^^^^^^^^^^^^ Cannot call impure function
+  45 |                                 left: `${Math.random() * 100}%`,
+  46 |                                 filter: 'blur(1px)',
+  47 |                                 animation: `float ${5 + Math.random() * 5}s infinite ease-in-out`,  react-hooks/purity
+  45:42  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  43 |                             style={{
+  44 |                                 top: `${Math.random() * 100}%`,
+> 45 |                                 left: `${Math.random() * 100}%`,
+     |                                          ^^^^^^^^^^^^^ Cannot call impure function
+  46 |                                 filter: 'blur(1px)',
+  47 |                                 animation: `float ${5 + Math.random() * 5}s infinite ease-in-out`,
+  48 |                                 animationDelay: `${Math.random() * 5}s`        react-hooks/purity
+  47:57  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  45 |                                 left: `${Math.random() * 100}%`,
+  46 |                                 filter: 'blur(1px)',
+> 47 |                                 animation: `float ${5 + Math.random() * 5}s infinite ease-in-out`,
+     |                                                         ^^^^^^^^^^^^^ Cannot call impure function
+  48 |                                 animationDelay: `${Math.random() * 5}s`
+  49 |                             }}
+  50 |                         ></div>                               react-hooks/purity
+  48:52  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  46 |                                 filter: 'blur(1px)',
+  47 |                                 animation: `float ${5 + Math.random() * 5}s infinite ease-in-out`,
+> 48 |                                 animationDelay: `${Math.random() * 5}s`
+     |                                                    ^^^^^^^^^^^^^ Cannot call impure function
+  49 |                             }}
+  50 |                         ></div>
+  51 |                     ))}                                                                             react-hooks/purity
+
+C:\vidyacompasswebsite\studentcompass\src\components\Modules\ModulesSection.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\vidyacompasswebsite\studentcompass\src\components\Navbar\Logo3D.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\vidyacompasswebsite\studentcompass\src\components\Navbar\Navbar.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+Γ£û 22 problems (21 errors, 1 warning)
+

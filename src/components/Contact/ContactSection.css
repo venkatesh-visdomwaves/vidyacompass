@@ -1,0 +1,19 @@
+/* Contact Section Styles */
+
+input::placeholder,
+textarea::placeholder {
+    color: #a0aec0;
+    font-size: 0.875rem;
+}
+
+.form-group:focus-within label {
+    color: #2563eb;
+    /* Primary 600 */
+}
+
+/* Ensure smooth glass effect for social icons */
+.bg-white\/20 {
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}

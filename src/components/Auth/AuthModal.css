@@ -1,0 +1,31 @@
+/* AuthModal Styles */
+.auth-modal-overlay {
+    backdrop-filter: blur(8px);
+}
+
+.auth-form-input:focus {
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+}
+
+/* Custom transitions for the modal */
+.auth-modal-enter {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+}
+
+.auth-modal-enter-active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.auth-modal-exit {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.auth-modal-exit-active {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+    transition: opacity 300ms, transform 300ms;
+}
