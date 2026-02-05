@@ -131,7 +131,7 @@ export const productData = {
             ],
             coreGap: {
                 title: "The Core Gap",
-                desc: "Career decisions are often made with limited data, emotional pressure, and incomplete awareness. Students may choose based on trends or peer influence. Parents may guide based on past experiences or financial concerns. Rarely is there a system that brings together:",
+                desc: "Career decisions often rely on limited data and peer influence. We replace uncertainty with clarity and precision.",
                 bullets: [
                     "A student’s interests and strengths",
                     "Real-world career opportunities",

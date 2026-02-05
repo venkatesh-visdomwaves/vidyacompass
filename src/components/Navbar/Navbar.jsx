@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo3D from './Logo3D';
 import './Navbar.css';
 
@@ -13,6 +14,9 @@ import './Navbar.css';
 const Navbar = ({ onOpenAuth }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [activeLink, setActiveLink] = useState('#home');
+    const navigate = useNavigate();
+    const location = useLocation();
 
     // Monitor scroll position to update navbar appearance
     useEffect(() => {
@@ -23,6 +27,37 @@ const Navbar = ({ onOpenAuth }) => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Scroll Spy & Route handling
+    useEffect(() => {
+        if (location.pathname === '/contact') {
+            setActiveLink('#contact');
+            return;
+        }
+
+        const handleScrollSpy = () => {
+            const sections = navLinks.filter(l => l.href.startsWith('#')).map(link => link.href.substring(1));
+            const scrollPosition = window.scrollY + 100;
+
+            let currentSection = '#home';
+            for (const section of sections) {
+                const element = document.getElementById(section);
+                if (element) {
+                    const offsetTop = element.offsetTop;
+                    const offsetHeight = element.offsetHeight;
+                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                        currentSection = `#${section}`;
+                        break;
+                    }
+                }
+            }
+            setActiveLink(currentSection);
+        };
+
+        window.addEventListener('scroll', handleScrollSpy);
+        handleScrollSpy();
+        return () => window.removeEventListener('scroll', handleScrollSpy);
+    }, [location.pathname]);
+
     // Define navigation links for consistency
     const navLinks = [
         { name: 'Home', href: '#home' },
@@ -30,8 +65,28 @@ const Navbar = ({ onOpenAuth }) => {
         { name: 'Features', href: '#features' },
         { name: 'Modules', href: '#modules' },
         { name: 'Challenges', href: '#challenges' },
-        { name: 'Contact', href: '#contact' }
+        { name: 'Contact', href: '/contact', isRoute: true }
     ];
+
+    const handleNavClick = (link) => {
+        if (link.isRoute) {
+            navigate(link.href);
+            window.scrollTo(0, 0);
+        } else {
+            if (location.pathname !== '/') {
+                navigate('/');
+                setTimeout(() => {
+                    const element = document.querySelector(link.href);
+                    if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            } else {
+                const element = document.querySelector(link.href);
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        setActiveLink(link.href);
+        setIsMobileMenuOpen(false);
+    };
 
     return (
         <motion.nav
@@ -42,10 +97,9 @@ const Navbar = ({ onOpenAuth }) => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Brand Logo & Tagline (Clickable to Home) */}
-                    <motion.a
-                        href="#home"
+                    <div
+                        onClick={() => handleNavClick({ href: '#home', isRoute: false })}
                         className="flex items-center space-x-2 md:space-x-3 cursor-pointer group/logo"
-                        whileHover={{ scale: 1.02 }}
                     >
                         <Logo3D />
                         <div className="flex flex-col items-start gap-0 ml-1">
@@ -61,24 +115,34 @@ const Navbar = ({ onOpenAuth }) => {
                                 Navigate Your Future
                             </p>
                         </div>
-                    </motion.a>
+                    </div>
 
                     {/* Navigation Links for Desktop */}
                     <div className="hidden md:flex items-center space-x-6">
                         {navLinks.map((link, idx) => {
+                            const isActive = activeLink === link.href || (link.href === '/contact' && location.pathname === '/contact');
                             const colors = ['#FF9933', '#FFFFFF', '#138808', '#FF9933', '#FFFFFF', '#138808'];
+                            const activeColor = colors[idx % colors.length];
+
                             return (
-                                <a
+                                <button
                                     key={link.name}
-                                    href={link.href}
-                                    className="text-gray-300 hover:text-white text-xs font-light transition-colors relative group"
+                                    onClick={() => handleNavClick(link)}
+                                    className={`relative text-xs font-light transition-all duration-300 group ${isActive ? 'text-white' : 'text-gray-300 hover:text-white'}`}
                                 >
                                     {link.name}
+                                    {/* Active State Underline & Glow */}
                                     <span
-                                        className="absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
-                                        style={{ backgroundColor: colors[idx % colors.length] }}
+                                        className={`absolute -bottom-1 left-0 h-0.5 transition-all duration-300 ${isActive ? 'w-full shadow-[0_0_8px_currentColor]' : 'w-0 group-hover:w-full'}`}
+                                        style={{ backgroundColor: activeColor, color: activeColor }}
                                     ></span>
-                                </a>
+                                    {isActive && (
+                                        <span
+                                            className="absolute inset-0 bg-white/5 blur-lg -z-10 rounded-full"
+                                            style={{ backgroundColor: `${activeColor}20` }}
+                                        ></span>
+                                    )}
+                                </button>
                             );
                         })}
 
@@ -89,15 +153,15 @@ const Navbar = ({ onOpenAuth }) => {
                             >
                                 Account
                             </button>
-                            <a href="#contact">
-                                <motion.button
+                            <button onClick={() => handleNavClick({ href: '/contact', isRoute: true })}>
+                                <motion.div
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     className="px-5 py-2 bg-gradient-to-r from-primary-400 to-accent-400 text-black rounded text-[10px] font-black shadow-lg hover:brightness-110 transition-all"
                                 >
                                     Get Started
-                                </motion.button>
-                            </a>
+                                </motion.div>
+                            </button>
                         </div>
                     </div>
 
@@ -122,14 +186,13 @@ const Navbar = ({ onOpenAuth }) => {
                     >
                         <div className="px-4 py-6 space-y-4">
                             {navLinks.map((link) => (
-                                <a
+                                <button
                                     key={link.name}
-                                    href={link.href}
-                                    className="block text-gray-300 hover:text-white font-medium py-2 text-sm"
-                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className={`block w-full text-left font-medium py-2 text-sm ${activeLink === link.href ? 'text-white pl-2 border-l-2 custom-border-l' : 'text-gray-300 hover:text-white'}`}
+                                    onClick={() => handleNavClick(link)}
                                 >
                                     {link.name}
-                                </a>
+                                </button>
                             ))}
                             <div className="pt-4 space-y-3">
                                 <button
@@ -141,21 +204,18 @@ const Navbar = ({ onOpenAuth }) => {
                                 >
                                     Account
                                 </button>
-                                <a href="#contact" className="block w-full">
-                                    <button
-                                        className="w-full px-6 py-2.5 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded font-bold text-sm navbar-button-indian"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        Get Started
-                                    </button>
-                                </a>
+                                <button
+                                    className="w-full px-6 py-2.5 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded font-bold text-sm navbar-button-indian"
+                                    onClick={() => handleNavClick({ href: '/contact', isRoute: true })}
+                                >
+                                    Get Started
+                                </button>
                             </div>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* Shiny Bottom Line */}
             {/* Shiny Bottom Line */}
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent shadow-[0_0_8px_rgba(255,255,255,0.4)]"></div>
         </motion.nav>

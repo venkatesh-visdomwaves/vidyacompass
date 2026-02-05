@@ -43,7 +43,7 @@ const Compass = ({ careerPaths, hoveredPath, setHoveredPath }) => {
                     className="absolute inset-0 z-0 animate-slow-rotate"
                 >
                     <img
-                        src="/compass-hero.png"
+                        src="/public/wmremove-transformed.png"
                         alt="Compass Texture"
                         className="w-full h-full object-cover opacity-100 brightness-110 scale-105"
                     />
@@ -165,7 +165,10 @@ const Compass = ({ careerPaths, hoveredPath, setHoveredPath }) => {
  rounded-full flex items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.5)] relative group"
                 >
                     <div className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
-                    <FaUserGraduate className="text-white text-2xl md:text-3xl drop-shadow-md" />
+                    {/* {<FaUserGraduate className="text-yellow-00 text-2xl md:text-3xl drop-shadow-md" /> } */}
+                     {/* {<FaUserGraduate className=""text-2xl md:text-3xl drop-shadow-lg
+             text-transparent bg-clip-text
+             bg-gradient-to-br from-yellow-300 via-yellow-500 to-yellow-700 /> } */}
                 </motion.div>
             </div>
 

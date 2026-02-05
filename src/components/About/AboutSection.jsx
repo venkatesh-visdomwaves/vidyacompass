@@ -12,7 +12,7 @@ const AboutSection = () => {
     const { overviewSections } = productData.studentCompass;
 
     return (
-        <section id="about" className="py-32 bg-[#E1F0FF] overflow-hidden">
+        <section id="about" className="py-12 bg-[#E1F0FF] overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Main Section Header */}
                 <motion.div
@@ -31,15 +31,15 @@ const AboutSection = () => {
                 </motion.div>
 
                 {overviewSections.map((section, idx) => (
-                    <div key={idx} className={`grid lg:grid-cols-2 gap-16 lg:gap-24 items-center ${idx !== 0 ? 'mt-32' : ''}`}>
+                    <div key={idx} className={`grid lg:grid-cols-2 gap-16 items-center ${idx !== 0 ? 'mt-16' : ''}`}>
 
-                        {/* Image Column (FIXED LEFT) */}
+                        {/* Image Column */}
                         <motion.div
-                            initial={{ opacity: 0, x: -50 }}
+                            initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="relative order-1"
+                            className={`relative ${idx % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}
                         >
                             <div className="absolute -inset-6 bg-gradient-to-tr from-primary-100 to-accent-100 rounded-[3rem] blur-2xl opacity-20"></div>
                             <div className="relative rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border-4 border-white group">
@@ -59,13 +59,13 @@ const AboutSection = () => {
                             </div>
                         </motion.div>
 
-                        {/* Content Column (FIXED RIGHT) */}
+                        {/* Content Column */}
                         <motion.div
-                            initial={{ opacity: 0, x: 50 }}
+                            initial={{ opacity: 0, x: idx % 2 === 0 ? 50 : -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                            className="space-y-8 order-2"
+                            className={`space-y-8 ${idx % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}
                         >
                             <div className="space-y-4">
                                 <h3 className="text-2xl md:text-4xl font-bold text-gray-900 tracking-tight leading-tight relative inline-block pb-3">

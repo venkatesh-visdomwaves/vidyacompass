@@ -14,7 +14,7 @@ const ChallengesSection = () => {
     const { challenges } = productData.studentCompass;
 
     return (
-        <section id="challenges" className="py-32 bg-[#E6F3FF] overflow-hidden">
+        <section id="challenges" className="py-12 bg-[#E6F3FF] overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Section Heading - Unified Strategic Style */}

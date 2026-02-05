@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
-import HeroSection from './components/Hero/HeroSection';
-import AboutSection from './components/About/AboutSection';
-import FeaturesSection from './components/Features/FeaturesSection';
-import ModulesSection from './components/Modules/ModulesSection';
-import ChallengesSection from './components/Challenges/ChallengesSection';
-import ContactSection from './components/Contact/ContactSection';
+import HomePage from './pages/HomePage';
+import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer/Footer';
 import AICompanion from './components/Companion/AICompanion';
 import AuthModal from './components/Auth/AuthModal';
@@ -26,51 +23,35 @@ const App = () => {
     setIsAuthModalOpen(true);
   };
 
-  // Basic smooth scroll implementation for standard browsers
-  useEffect(() => {
-    document.title = "Vidya Compass | Navigate Your Future";
-  }, []);
-
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-primary-100 selection:text-primary-700">
+    <BrowserRouter>
+      <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-primary-100 selection:text-primary-700">
 
-      {/* 1. Global Navigation Bar */}
-      <Navbar onOpenAuth={openAuth} />
+        {/* 1. Global Navigation Bar */}
+        <Navbar onOpenAuth={openAuth} />
 
-      <main>
-        {/* 2. Above-the-fold Hero Section (Text Left, Compass Right) */}
-        <HeroSection onOpenAuth={openAuth} />
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage onOpenAuth={openAuth} />} />
+            <Route path="/contact" element={<ContactPage />} />
+          </Routes>
+        </main>
 
-        {/* 3. Foundational Overview */}
-        <AboutSection />
+        {/* 8. Global Site Footer */}
+        <Footer />
 
-        {/* 4. Strategic Advantages */}
-        <FeaturesSection />
+        {/* AI Voice Navigator & Companion */}
+        <AICompanion />
 
-        {/* 5. Core Operational Modules */}
-        <ModulesSection />
+        {/* Global Auth Modal */}
+        <AuthModal
+          isOpen={isAuthModalOpen}
+          onClose={() => setIsAuthModalOpen(false)}
+          initialMode={authMode}
+        />
 
-        {/* 6. Problem/Solution Deep Dive */}
-        <ChallengesSection />
-
-        {/* 7. Conversion/Inquiry Point */}
-        <ContactSection />
-      </main>
-
-      {/* 8. Global Site Footer */}
-      <Footer />
-
-      {/* AI Voice Navigator & Companion */}
-      <AICompanion />
-
-      {/* Global Auth Modal */}
-      <AuthModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-        initialMode={authMode}
-      />
-
-    </div>
+      </div>
+    </BrowserRouter>
   );
 };
 

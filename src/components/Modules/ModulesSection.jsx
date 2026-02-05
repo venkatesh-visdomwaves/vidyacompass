@@ -25,7 +25,7 @@ const ModulesSection = () => {
     const { services } = productData.studentCompass;
 
     return (
-        <section id="modules" className="py-32 bg-[#D6E9FF] relative overflow-hidden">
+        <section id="modules" className="py-12 bg-[#D6E9FF] relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Module Header - Unified Style */}

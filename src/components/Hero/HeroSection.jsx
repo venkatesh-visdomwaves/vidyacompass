@@ -63,7 +63,7 @@ const HeroSection = ({ onOpenAuth }) => {
                     {/* ===== Left Content ===== */}
                     <div className="text-center lg:text-left flex flex-col items-center lg:items-start max-w-2xl lg:pl-16">
                         {/* Branding */}
-                        <a
+                        {/* <a
                             href="https://erp.visdomwaves.com"
                             target="_blank"
                             rel="noopener noreferrer"
@@ -80,14 +80,18 @@ const HeroSection = ({ onOpenAuth }) => {
                                     Powered by <span className="text-primary-400 group-hover/branding:text-primary-300 transition-colors">Visdom Waves</span>
                                 </span>
                             </motion.div>
-                        </a>
+                        </a> */}
 
                         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-tight tracking-tight mb-6 flex flex-col items-center lg:items-start text-center lg:text-left w-full">
                             <motion.span
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.8 }}
-                                className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] mb-2 inline-block"
+                                className=" text-transparent bg-clip-text
+  bg-gradient-to-r
+  from-orange-500 via-blue-900 to-green-600
+  drop-shadow-[0_0_25px_rgba(19,41,75,0.5)]
+  mb-2 inline-block"
                             >
                                 Vidya Compass
                             </motion.span>
@@ -96,11 +100,33 @@ const HeroSection = ({ onOpenAuth }) => {
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.8, delay: 0.2 }}
-                                className="text-yellow-400 drop-shadow-lg font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-[0.2em] uppercase inline-block whitespace-nowrap"
+                                className="text-yellow-500 drop-shadow-lg font-light text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-[0.2em] uppercase inline-block whitespace-nowrap"
                             >
                                 Navigate Your Future
                             </motion.span>
                         </h1>
+                        {/* Branding */}
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}
+                            className="flex items-center gap-4 mb-6"
+                        >
+                            {/* Logo as Button */}
+                            <a
+                                href="https://erp.visdomwaves.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group/logo relative p-2 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer shadow-lg hover:shadow-primary-500/20"
+                            >
+                                <img src={logo} alt="Visdom Waves" className="h-6 md:h-8 w-auto" />
+                            </a>
+
+                            {/* Text as Plain Text */}
+                            <span className="text-[10px] md:text-xs font-bold text-white/60 tracking-widest uppercase">
+                                Powered by <span className="text-primary-400">Visdom Waves</span>
+                            </span>
+                        </motion.div>
 
 
                         {/* ===== Description ===== */}
@@ -160,3 +186,22 @@ const HeroSection = ({ onOpenAuth }) => {
 };
 
 export default HeroSection;
+//  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-tight tracking-tight mb-6 flex flex-col items-center lg:items-start text-center lg:text-left w-full">
+// <motion.span
+//     initial={{ opacity: 0, x: -20 }}
+//     animate={{ opacity: 1, x: 0 }}
+//     transition={{ duration: 0.8 }}
+//     className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] mb-2 inline-block"
+// >
+//     Vidya Compass
+// </motion.span>
+
+//                             <motion.span
+//                                 initial={{ opacity: 0, x: -20 }}
+//                                 animate={{ opacity: 1, x: 0 }}
+//                                 transition={{ duration: 0.8, delay: 0.2 }}
+//                                 className="text-yellow-400 drop-shadow-lg font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-[0.2em] uppercase inline-block whitespace-nowrap"
+//                             >
+//                                 Navigate Your Future
+//                             </motion.span>
+//                         </h1>
