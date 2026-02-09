@@ -45,9 +45,9 @@ const AboutSection = () => {
                             <div className="relative rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border-4 border-white group">
                                 <img
                                     src={
-                                        idx === 0 ? "public/StudentCompass.webp" :
+                                        idx === 0 ? "/StudentCompass.webp" :
                                             idx === 1 ? "https://careerimpressions.ca/wp-content/uploads/2014/01/Career-Growth.jpg" :
-                                                idx === 2 ? "public/AIModelDevelopment.webp" :
+                                                idx === 2 ? "/AIModelDevelopment.webp" :
                                                     "https://www.psychologicalscience.org/redesign/wp-content/uploads/2015/12/PAFF_040118_helpingothers-609x419.jpg"
                                     }
                                     alt={section.title}

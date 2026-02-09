@@ -4,7 +4,7 @@ export const productData = {
             title: "VIDYA",
             highlightedTitle: "COMPASS",
             description: "Aggregating attendance, grades, and behavioral insights into a single digital dashboard. AI-powered guide for educational clarity and career success.",
-            backgroundImage: "/image/products/StudentCompass.webp",
+            backgroundImage: "/StudentCompass.webp",
             benefitsImage: "https://media.istockphoto.com/id/1312257273/photo/compass-sitting-over-metallic-dark-blue-background.jpg?s=612x612&w=0&k=20&c=InwSQjqC5lXpodDC6dfQbGOY7flchbvjNlsmpeFfQqE="
         },
         overviewSections: [
