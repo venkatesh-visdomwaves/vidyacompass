@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo3D from './Logo3D';
 import './Navbar.css';
@@ -29,61 +29,32 @@ const Navbar = ({ onOpenAuth }) => {
 
     // Scroll Spy & Route handling
     useEffect(() => {
-        if (location.pathname === '/contact') {
-            setActiveLink('#contact');
-            return;
+        // Set active link based on current route
+        const currentPath = location.pathname;
+        const matchingLink = navLinks.find(link =>
+            link.isRoute ? link.href === currentPath : false
+        );
+
+        if (matchingLink) {
+            setActiveLink(matchingLink.href);
+        } else if (currentPath === '/') {
+            setActiveLink('/');
         }
-
-        const handleScrollSpy = () => {
-            const sections = navLinks.filter(l => l.href.startsWith('#')).map(link => link.href.substring(1));
-            const scrollPosition = window.scrollY + 100;
-
-            let currentSection = '#home';
-            for (const section of sections) {
-                const element = document.getElementById(section);
-                if (element) {
-                    const offsetTop = element.offsetTop;
-                    const offsetHeight = element.offsetHeight;
-                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                        currentSection = `#${section}`;
-                        break;
-                    }
-                }
-            }
-            setActiveLink(currentSection);
-        };
-
-        window.addEventListener('scroll', handleScrollSpy);
-        handleScrollSpy();
-        return () => window.removeEventListener('scroll', handleScrollSpy);
     }, [location.pathname]);
 
     // Define navigation links for consistency
     const navLinks = [
-        { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about' },
-        { name: 'Features', href: '#features' },
-        { name: 'Modules', href: '#modules' },
-        { name: 'Challenges', href: '#challenges' },
-        { name: 'Contact', href: '/contact', isRoute: true }
+        { name: 'Home', href: '/' },
+        { name: 'Platform', href: '/platform', isRoute: true },
+        { name: 'How It Works', href: '/how-it-works', isRoute: true },
+        { name: 'Careers', href: '/careers', isRoute: true },
+        { name: 'Parents', href: '/parents', isRoute: true },
+        { name: 'Students', href: '/students', isRoute: true }
     ];
 
     const handleNavClick = (link) => {
-        if (link.isRoute) {
-            navigate(link.href);
-            window.scrollTo(0, 0);
-        } else {
-            if (location.pathname !== '/') {
-                navigate('/');
-                setTimeout(() => {
-                    const element = document.querySelector(link.href);
-                    if (element) element.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-            } else {
-                const element = document.querySelector(link.href);
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
+        navigate(link.href);
+        window.scrollTo(0, 0);
         setActiveLink(link.href);
         setIsMobileMenuOpen(false);
     };
@@ -98,7 +69,7 @@ const Navbar = ({ onOpenAuth }) => {
                 <div className="flex justify-between items-center h-16">
                     {/* Brand Logo & Tagline (Clickable to Home) */}
                     <div
-                        onClick={() => handleNavClick({ href: '#home', isRoute: false })}
+                        onClick={() => handleNavClick({ href: '/', isRoute: true })}
                         className="flex items-center space-x-2 md:space-x-3 cursor-pointer group/logo"
                     >
                         <Logo3D />
@@ -120,7 +91,7 @@ const Navbar = ({ onOpenAuth }) => {
                     {/* Navigation Links for Desktop */}
                     <div className="hidden md:flex items-center space-x-6">
                         {navLinks.map((link, idx) => {
-                            const isActive = activeLink === link.href || (link.href === '/contact' && location.pathname === '/contact');
+                            const isActive = activeLink === link.href;
                             const colors = ['#FF9933', '#FFFFFF', '#138808', '#FF9933', '#FFFFFF', '#138808'];
                             const activeColor = colors[idx % colors.length];
 
@@ -149,11 +120,11 @@ const Navbar = ({ onOpenAuth }) => {
                         <div className="flex items-center gap-4 border-l border-gray-800 pl-6 ml-2">
                             <button
                                 onClick={() => onOpenAuth('signin')}
-                                className="text-gray-300 hover:text-white text-xs font-bold transition-colors"
+                                className="flex items-center gap-2 px-6 py-2 rounded-full border border-[#FFBF00] bg-[#1a1a1a] text-[#FFBF00] hover:bg-[#FFBF00] hover:text-black transition-all duration-300 group"
                             >
-                                Account
+                                <span className="text-sm font-medium">Account</span>
                             </button>
-                            <button onClick={() => handleNavClick({ href: '/contact', isRoute: true })}>
+                            {/* <button onClick={() => handleNavClick({ href: '/contact', isRoute: true })}>
                                 <motion.div
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
@@ -161,7 +132,7 @@ const Navbar = ({ onOpenAuth }) => {
                                 >
                                     Get Started
                                 </motion.div>
-                            </button>
+                            </button> */}
                         </div>
                     </div>
 
@@ -200,16 +171,16 @@ const Navbar = ({ onOpenAuth }) => {
                                         setIsMobileMenuOpen(false);
                                         onOpenAuth('signin');
                                     }}
-                                    className="w-full px-6 py-2.5 bg-white/5 text-white border border-white/10 rounded font-bold text-sm"
+                                    className="w-full px-6 py-2.5 rounded-full border border-[#FFBF00] bg-[#1a1a1a] text-[#FFBF00] font-bold text-sm flex items-center justify-center gap-2"
                                 >
                                     Account
                                 </button>
-                                <button
+                                {/* <button
                                     className="w-full px-6 py-2.5 bg-gradient-to-r from-primary-600 to-accent-600 text-white rounded font-bold text-sm navbar-button-indian"
                                     onClick={() => handleNavClick({ href: '/contact', isRoute: true })}
                                 >
                                     Get Started
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                     </motion.div>

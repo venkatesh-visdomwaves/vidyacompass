@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import HomePage from './pages/HomePage';
+import HowItWorksPage from './pages/HowItWorksPage';
 import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer/Footer';
 import AICompanion from './components/Companion/AICompanion';
@@ -33,6 +34,7 @@ const App = () => {
         <main>
           <Routes>
             <Route path="/" element={<HomePage onOpenAuth={openAuth} />} />
+            <Route path="/how-it-works" element={<HowItWorksPage />} />
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </main>

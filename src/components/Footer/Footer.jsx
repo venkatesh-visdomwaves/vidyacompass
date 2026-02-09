@@ -21,9 +21,9 @@ const Footer = () => {
     // Navigation mapping for footer sections
     const footerLinks = {
         Platform: ['Features', 'Modules', 'Careers', 'Pricing'],
-        Support: ['Parents', 'Students', 'FAQs', 'Help Center'],
-        Company: ['About Us', 'Blog', 'Careers', 'Press'],
-        Legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Disclaimer']
+        Support: ['Parents', 'Students', 'Contact', 'Help Center'],
+        Company: ['About Us', 'Blog', 'Resources', 'Press'],
+        Legal: ['Privacy Policy', 'Terms of Service', 'Disclaimer']
     };
 
     return (
@@ -86,17 +86,17 @@ const Footer = () => {
                 </div>
 
                 {/* Legal and Copyright Bottom Bar */}
-                <div className="border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div className="flex flex-col items-center md:items-start gap-1">
-                        <p className="text-[10px] text-primary-500 font-bold uppercase tracking-[0.2em] mb-1">Powered by Visdom Waves</p>
-                        <p className="text-[10px] md:text-xs text-gray-600 uppercase tracking-widest text-center md:text-left">
-                            © 2026 Vidya Compass. Precision Career Guidance. All Rights Reserved.
+                <div className="border-t border-gray-900 pt-8">
+                    <div className="flex flex-col items-center gap-3 text-center">
+                        <h3 className="text-base md:text-lg font-bold text-white">
+                            Vidya Compass <span className="text-gray-400 font-normal">– Precision Career Guidance</span>
+                        </h3>
+                        <p className="text-sm md:text-base text-gray-400">
+                            Powered by <span className="text-primary-500 font-bold">Visdom Waves</span>
                         </p>
-                    </div>
-                    <div className="flex gap-4 md:gap-8 text-[10px] md:text-[11px] text-gray-600 uppercase tracking-widest">
-                        <a href="#" className="hover:text-white transition-colors">Privacy</a>
-                        <a href="#" className="hover:text-white transition-colors">Terms</a>
-                        <a href="#" className="hover:text-white transition-colors">Cookies</a>
+                        <p className="text-xs md:text-sm text-gray-600">
+                            © 2026 Vidya Compass. All Rights Reserved.
+                        </p>
                     </div>
                 </div>
             </div>
