@@ -1,16 +1,49 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaArrowRight, FaLaptopCode, FaStethoscope, FaPalette, FaBriefcase } from 'react-icons/fa';
 import Compass from './Compass/Compass';
 import './HeroSection.css';
 
 import logo from '../../assets/visdom_waves_logo.png';
 
+// Generate static particle positions outside the component to avoid impurity warnings during render
+const PARTICLES = [...Array(40)].map((_, i) => ({
+    id: i,
+    top: `${Math.random() * 100}%`,
+    left: `${Math.random() * 100}%`,
+    duration: 3 + Math.random() * 7,
+    delay: Math.random() * 5
+}));
+
 const HeroSection = ({ onOpenAuth }) => {
     const [hoveredPath, setHoveredPath] = useState(null);
+    const [taglineIndex, setTaglineIndex] = useState(0);
 
-    const titleChars = "Vidya Compass".split("");
-    const subTitleChars = "Navigate Your Future".split("");
+    const taglines = [
+        { text: "Navigate Your Future", color: "from-blue-400 to-cyan-400" },
+        { text: "Shape Your Future", color: "from-purple-400 to-pink-400" },
+        { text: "Guide Your Path", color: "from-teal-400 to-emerald-400" },
+        { text: "Discover Your Direction", color: "from-orange-400 to-yellow-400" },
+        { text: "Plan Your Success", color: "from-pink-400 to-rose-400" },
+        { text: "Choose Your Career", color: "from-cyan-400 to-blue-400" },
+        { text: "Direct Your Dreams", color: "from-indigo-400 to-purple-400" },
+        { text: "Build Your Tomorrow", color: "from-green-400 to-teal-400" },
+        { text: "Map Your Journey", color: "from-amber-400 to-orange-400" },
+        { text: "Lead Your Way", color: "from-blue-500 to-indigo-500" },
+        { text: "Find Your Future", color: "from-violet-400 to-fuchsia-400" },
+        { text: "Unlock Your Potential", color: "from-sky-400 to-blue-400" },
+        { text: "Empower Your Journey", color: "from-orange-500 to-red-500" },
+        { text: "Create Your Path", color: "from-emerald-500 to-teal-500" },
+        { text: "Design Your Destiny", color: "from-purple-500 to-pink-500" },
+        { text: "Explore Your Goals", color: "from-cyan-500 to-blue-500" }
+    ];
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTaglineIndex((prev) => (prev + 1) % taglines.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, [taglines.length]);
 
     const careerPaths = [
         { icon: <FaLaptopCode />, label: 'Tech', angle: 0, color: 'text-blue-400' },
@@ -26,42 +59,53 @@ const HeroSection = ({ onOpenAuth }) => {
         >
 
             {/* ===== Dynamic Nature Background ===== */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+            <div className="absolute inset-0 bg-[#0B1437]">
                 {/* Sun / Sunrise Element */}
-                <div className="absolute top-[10%] right-[15%] w-40 h-40 md:w-64 md:h-64 bg-yellow-500 rounded-full blur-[80px] opacity-40 animate-sun-glow"></div>
-                <div className="absolute top-[15%] right-[20%] w-20 h-20 md:w-32 md:h-32 bg-orange-400 rounded-full blur-[40px] opacity-60 animate-sunrise"></div>
+                <div className="absolute top-[8%] right-[12%] w-48 h-48 md:w-72 md:h-72 bg-yellow-500 rounded-full blur-[80px] opacity-60 animate-sun-glow"></div>
+                <div className="absolute top-[10%] right-[14%] w-24 h-24 md:w-40 md:h-40 bg-orange-400 rounded-full blur-[40px] opacity-70 animate-sunrise"></div>
 
-                {/* Light Rays */}
+                {/* Sun Core (The "Shine") */}
+                <div className="absolute top-[12%] right-[16%] w-16 h-16 md:w-24 md:h-24 bg-white rounded-full blur-xl opacity-90 animate-pulse"></div>
+                <div className="absolute top-[12%] right-[16%] w-1 h-32 md:w-1.5 md:h-48 bg-white/20 blur-sm -rotate-45"></div>
+                <div className="absolute top-[12%] right-[16%] w-1 h-32 md:w-1.5 md:h-48 bg-white/20 blur-sm rotate-45"></div>
+
+                {/* Rotating Light Rays */}
                 <div className="light-beam animate-rays-drift"></div>
+                {/* Radial Burst / Rays */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_40%,_rgba(66,133,244,0.15),transparent_60%)]"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_60%,_rgba(20,40,100,0.3),transparent_70%)]"></div>
 
-                {/* Stars/Dust particles (Simplified for performance) */}
-                <div className="absolute inset-0 opacity-30 pointer-events-none">
-                    {[...Array(20)].map((_, i) => (
+                {/* Stars/Dust particles */}
+                <div className="absolute inset-0 pointer-events-none">
+                    {PARTICLES.map((p) => (
                         <div
-                            key={i}
-                            className="absolute bg-white rounded-full w-1 h-1"
+                            key={p.id}
+                            className="absolute bg-white rounded-full w-0.5 h-0.5 shadow-[0_0_8px_rgba(255,255,255,1)]"
                             style={{
-                                top: `${Math.random() * 100}%`,
-                                left: `${Math.random() * 100}%`,
-                                filter: 'blur(1px)',
-                                animation: `float ${5 + Math.random() * 5}s infinite ease-in-out`,
-                                animationDelay: `${Math.random() * 5}s`
+                                top: p.top,
+                                left: p.left,
+                                animation: `star-twinkle ${p.duration}s infinite ease-in-out`,
+                                animationDelay: `${p.delay}s`
                             }}
                         ></div>
                     ))}
                 </div>
             </div>
 
-            {/* ===== Premium Overlay (No Blur for Clarity) ===== */}
-            <div className="absolute inset-0 bg-slate-950/20"></div>
+            {/* Light Rays Burst from Compass */}
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-full h-full opacity-30 pointer-events-none select-none">
+                <div className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[conic-gradient(from_0deg,transparent,rgba(255,255,255,0.05),transparent_20deg)] animate-[spin_60s_linear_infinite]"></div>
+            </div>
+
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B1437] via-transparent to-transparent opacity-60"></div>
 
 
             <div className="relative max-w-7xl mx-auto w-full z-10">
 
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 pt-8 md:pt-0">
+                <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-32 pt-8 md:pt-0">
 
                     {/* ===== Left Content ===== */}
-                    <div className="text-center lg:text-left flex flex-col items-center lg:items-start max-w-2xl lg:pl-16">
+                    <div className="text-center lg:text-left flex flex-col items-center lg:items-start max-w-2xl">
                         {/* Branding */}
                         {/* <a
                             href="https://erp.visdomwaves.com"
@@ -82,28 +126,30 @@ const HeroSection = ({ onOpenAuth }) => {
                             </motion.div>
                         </a> */}
 
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-tight tracking-tight mb-6 flex flex-col items-center lg:items-start text-center lg:text-left w-full">
+                        <h1 className="flex flex-col items-center lg:items-start mb-6 w-full select-none">
                             <motion.span
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8 }}
-                                className=" text-transparent bg-clip-text
-  bg-gradient-to-r
-  from-orange-500 via-blue-900 to-green-600
-  drop-shadow-[0_0_25px_rgba(19,41,75,0.5)]
-  mb-2 inline-block"
+                                className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-light tracking-tight mb-4 md:mb-6 leading-none whitespace-nowrap"
                             >
                                 Vidya Compass
                             </motion.span>
 
-                            <motion.span
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.8, delay: 0.2 }}
-                                className="text-yellow-500 drop-shadow-lg font-light text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-[0.2em] uppercase inline-block whitespace-nowrap"
-                            >
-                                Navigate Your Future
-                            </motion.span>
+                            <div className="h-[1.5em] flex items-center overflow-hidden">
+                                <AnimatePresence mode="wait">
+                                    <motion.span
+                                        key={taglineIndex}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                        transition={{ duration: 0.5, ease: "easeOut" }}
+                                        className={`bg-gradient-to-r ${taglines[taglineIndex].color} bg-clip-text text-transparent text-lg sm:text-xl md:text-2xl lg:text-[2rem] font-semibold tracking-[0.2em] uppercase leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.1)] whitespace-nowrap`}
+                                    >
+                                        {taglines[taglineIndex].text}
+                                    </motion.span>
+                                </AnimatePresence>
+                            </div>
                         </h1>
                         {/* Branding */}
                         <motion.div
@@ -134,7 +180,7 @@ const HeroSection = ({ onOpenAuth }) => {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
-                            className="text-sm md:text-lg text-blue-50/70 mb-8 md:mb-12 max-w-xl leading-relaxed font-light"
+                            className="text-sm md:text-base lg:text-lg text-white/60 mb-8 md:mb-12 max-w-xl leading-relaxed"
                         >
                             Unlock your potential with premium career navigation. Experience advanced profiling, real-time insights, and a crystal-clear roadmap to your dream career.
                         </motion.p>
@@ -145,32 +191,30 @@ const HeroSection = ({ onOpenAuth }) => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.8 }}
-                            className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center lg:justify-start items-center w-full sm:w-auto"
+                            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center w-full sm:w-auto"
                         >
                             <button
                                 onClick={() => onOpenAuth('signup')}
-                                className="w-full sm:w-auto px-10 md:px-12 py-4 bg-white/10 text-white border-2 border-white/40 rounded-2xl font-bold text-sm md:text-base hover:bg-white/20 backdrop-blur-md transition-all flex items-center justify-center gap-2 group/btn hover:border-white/60"
+                                className="btn-glass w-full sm:w-auto px-8 md:px-10 py-3.5 text-sm md:text-base text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2 group/btn"
                             >
-                                Start Your Journey <FaArrowRight className="group-hover/btn:translate-x-1 transition-transform" />
+                                Start Your Journey <FaArrowRight className="text-white group-hover/btn:translate-x-1 transition-transform" />
                             </button>
 
-                            <a href="#about" className="w-full sm:w-auto">
-                                <button className="w-full px-10 md:px-12 py-4 bg-white/5 text-white border-2 border-white/20 rounded-2xl font-bold text-sm md:text-base hover:bg-white/10 backdrop-blur-md transition-all">
-                                    Our Methodology
-                                </button>
-                            </a>
+                            <button className="btn-glass w-full sm:w-auto px-8 md:px-10 py-3.5 text-sm md:text-base text-white rounded-xl font-bold transition-all">
+                                Our Methodology
+                            </button>
                         </motion.div>
                     </div>
 
 
                     {/* ===== Right Content: Compass Container ===== */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
+                        initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.4, duration: 0.8 }}
-                        className="flex justify-center lg:justify-end w-full lg:w-auto relative z-0 lg:pr-20 xl:pr-64"
+                        transition={{ delay: 0.4, duration: 1 }}
+                        className="flex justify-center w-full lg:w-auto relative z-0"
                     >
-                        <div className="w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[350px] md:h-[350px] lg:w-[380px] lg:h-[380px] xl:w-[420px] xl:h-[420px] transition-transform duration-700 hover:scale-105">
+                        <div className="w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px] lg:w-[380px] lg:h-[380px] xl:w-[450px] xl:h-[450px] transition-transform duration-700">
                             <Compass
                                 careerPaths={careerPaths}
                                 hoveredPath={hoveredPath}
@@ -186,22 +230,3 @@ const HeroSection = ({ onOpenAuth }) => {
 };
 
 export default HeroSection;
-//  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-tight tracking-tight mb-6 flex flex-col items-center lg:items-start text-center lg:text-left w-full">
-// <motion.span
-//     initial={{ opacity: 0, x: -20 }}
-//     animate={{ opacity: 1, x: 0 }}
-//     transition={{ duration: 0.8 }}
-//     className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] mb-2 inline-block"
-// >
-//     Vidya Compass
-// </motion.span>
-
-//                             <motion.span
-//                                 initial={{ opacity: 0, x: -20 }}
-//                                 animate={{ opacity: 1, x: 0 }}
-//                                 transition={{ duration: 0.8, delay: 0.2 }}
-//                                 className="text-yellow-400 drop-shadow-lg font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-[0.2em] uppercase inline-block whitespace-nowrap"
-//                             >
-//                                 Navigate Your Future
-//                             </motion.span>
-//                         </h1>

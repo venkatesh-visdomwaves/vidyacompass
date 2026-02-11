@@ -1,28 +1,79 @@
 /* Hero Area specific animations */
 
 @keyframes float {
-    0%, 100% { transform: translateY(0) scale(1.0); }
-    50% { transform: translateY(-20px) scale(1.05); }
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1.0);
+    }
+
+    50% {
+        transform: translateY(-20px) scale(1.05);
+    }
 }
 
 @keyframes sun-glow {
-    0%, 100% { transform: scale(1); opacity: 0.6; filter: blur(40px); }
-    50% { transform: scale(1.2); opacity: 0.8; filter: blur(60px); }
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.9;
+        filter: blur(80px);
+        box-shadow: 0 0 100px rgba(255, 204, 0, 0.4);
+    }
+
+    50% {
+        transform: scale(1.4);
+        opacity: 1;
+        filter: blur(100px);
+        box-shadow: 0 0 150px rgba(255, 204, 0, 0.6);
+    }
 }
 
 @keyframes rays-drift {
-    0% { transform: rotate(0deg) scale(1); }
-    100% { transform: rotate(360deg) scale(1.1); }
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1.1);
+    }
 }
 
 @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes star-twinkle {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
 }
 
 @keyframes sunrise {
-    0% { transform: translateY(100px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .animate-float {
@@ -34,7 +85,7 @@
 }
 
 .animate-rays-drift {
-    animation: rays-drift 30s linear infinite;
+    animation: rays-drift 80s linear infinite;
 }
 
 .animate-sunrise {
@@ -62,22 +113,45 @@
 .glass-card::after {
     content: '';
     position: absolute;
-    top: 0; left: -100%;
-    width: 200%; height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.05),
-        transparent
-    );
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.05),
+            transparent);
     animation: shimmer 5s infinite;
 }
 
-/* Updated nature scene background */
+/* Updated hero section background */
 #home {
-    background: radial-gradient(circle at 70% 30%, #4a5568 0%, #0f172a 100%);
+    background: #0B1437;
     position: relative;
     overflow: hidden;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg) scale(2);
+    }
+
+    to {
+        transform: rotate(360deg) scale(2);
+    }
+}
+
+/* Premium Glassmorphism for buttons */
+.btn-glass {
+    background: rgba(43, 54, 116, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+.btn-glass:hover {
+    background: rgba(43, 54, 116, 0.6);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 /* Light beam effect */
@@ -87,11 +161,11 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: repeating-conic-gradient(
-        from 0deg,
-        transparent 0deg 10deg,
-        rgba(255, 255, 255, 0.02) 15deg 20deg
-    );
+    background: repeating-conic-gradient(from 0deg,
+            transparent 0deg 4deg,
+            rgba(255, 255, 255, 0.08) 5deg 6deg,
+            transparent 7deg 10deg);
     pointer-events: none;
     z-index: 1;
+    opacity: 0.7;
 }

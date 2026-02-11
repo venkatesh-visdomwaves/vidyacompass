@@ -5,26 +5,30 @@ import './Compass.css';
 
 const Compass = ({ careerPaths, hoveredPath, setHoveredPath }) => {
     const [deflection, setDeflection] = useState(0);
-    const [lastPos, setLastPos] = useState({ x: 0, y: 0 });
+    const lastPos = React.useRef({ x: 0, y: 0 });
+    const timerRef = React.useRef(null);
 
     const handleMouseMove = useCallback((e) => {
-        setLastPos(prev => {
-            const dx = e.clientX - prev.x;
-            const dy = e.clientY - prev.y;
-            const velocity = Math.sqrt(dx * dx + dy * dy);
+        const dx = e.clientX - lastPos.current.x;
+        const dy = e.clientY - lastPos.current.y;
+        const velocity = Math.sqrt(dx * dx + dy * dy);
 
-            if (velocity > 2) {
-                const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-                const shake = (Math.sin(angle) * velocity) / 12;
-                setDeflection(shake);
+        if (velocity > 2) {
+            const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+            const shake = (Math.sin(angle) * velocity) / 12;
+            setDeflection(shake);
 
-                // Briefly hold the deflection then reset
-                const resetTimer = setTimeout(() => setDeflection(0), 150);
-                // Note: We can't return the cleanup here, so we just let it run.
-                // For a simple hero component, this is usually acceptable.
-            }
-            return { x: e.clientX, y: e.clientY };
-        });
+            if (timerRef.current) clearTimeout(timerRef.current);
+            timerRef.current = setTimeout(() => setDeflection(0), 150);
+        }
+        lastPos.current = { x: e.clientX, y: e.clientY };
+    }, []);
+
+    // Cleanup timer on unmount
+    React.useEffect(() => {
+        return () => {
+            if (timerRef.current) clearTimeout(timerRef.current);
+        };
     }, []);
 
     return (

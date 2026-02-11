@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import HomePage from './pages/HomePage';
 import HowItWorksPage from './pages/HowItWorksPage';
 import ContactPage from './pages/ContactPage';
+import PlatformPage from './pages/PlatformPage';
+import CareersPage from './pages/CareersPage';
+import ParentsPage from './pages/ParentsPage';
+import StudentsPage from './pages/StudentsPage';
 import Footer from './components/Footer/Footer';
 import AICompanion from './components/Companion/AICompanion';
 import AuthModal from './components/Auth/AuthModal';
@@ -36,6 +40,10 @@ const App = () => {
             <Route path="/" element={<HomePage onOpenAuth={openAuth} />} />
             <Route path="/how-it-works" element={<HowItWorksPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/platform" element={<PlatformPage />} />
+            <Route path="/careers" element={<CareersPage />} />
+            <Route path="/parents" element={<ParentsPage />} />
+            <Route path="/students" element={<StudentsPage />} />
           </Routes>
         </main>
 

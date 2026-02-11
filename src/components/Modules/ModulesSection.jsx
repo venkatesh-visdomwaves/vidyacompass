@@ -25,7 +25,7 @@ const ModulesSection = () => {
     const { services } = productData.studentCompass;
 
     return (
-        <section id="modules" className="py-12 bg-[#D6E9FF] relative overflow-hidden">
+        <section id="modules" className="py-20 bg-[#E1F0FF] relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Module Header - Unified Style */}
@@ -36,16 +36,14 @@ const ModulesSection = () => {
                     className="text-center mb-24"
                 >
                     <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight flex flex-col items-center justify-center italic uppercase">
-                        <span className="bg-gradient-to-r from-[#FF9933] via-gray-800 to-[#138808] bg-clip-text text-transparent">
-                            Key Features & Modules
+                        <span className="bg-gradient-to-r from-[#FF9933] via-gray-800 to-[#138808] bg-clip-text text-transparent underline decoration-[#138808]">
+                            Precision Modules
                         </span>
-                        <span className="text-gray-900 mt-2 block not-italic font-light text-xl md:text-2xl lowercase normal-case">
-                            Comprehensive Ecosystem. Powerful Modules.
-                        </span>
+                        <span className="text-gray-900 mt-2 block not-italic font-light text-xl md:text-3xl tracking-[0.1em] uppercase">Comprehensive Career Ecosystem</span>
                     </h2>
-                    <div className="w-32 h-1.5 bg-gradient-to-r from-[#FF9933] via-white to-[#138808] mx-auto rounded-full shadow-sm mb-8"></div>
-                    <p className="text-slate-500 text-sm md:text-base font-light max-w-3xl mx-auto leading-relaxed">
-                        Vidya-Compass combines artificial intelligence, in-depth student profiling, and real-world career data to deliver personalized, practical, and future-ready guidance.
+                    <div className="w-32 h-1.5 bg-gradient-to-r from-[#FF9933] via-white to-[#138808] mx-auto rounded-full shadow-sm mb-8 border border-gray-100"></div>
+                    <p className="text-base md:text-lg text-gray-600 font-light max-w-3xl mx-auto leading-relaxed text-justify px-4">
+                        Vidya Compass combines artificial intelligence, in-depth student profiling, and real-world career data to deliver personalized, practical, and future-ready guidance.
                     </p>
                 </motion.div>
 

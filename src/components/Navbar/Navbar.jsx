@@ -11,10 +11,19 @@ import './Navbar.css';
  * Provides a sticky navigation bar with a glassmorphic effect on scroll.
  * Features a mobile-responsive menu and smooth link transitions.
  */
+// Define navigation links for consistency
+const navLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'Platform', href: '/platform', isRoute: true },
+    { name: 'How It Works', href: '/how-it-works', isRoute: true },
+    { name: 'Careers', href: '/careers', isRoute: true },
+    { name: 'Parents', href: '/parents', isRoute: true },
+    { name: 'Students', href: '/students', isRoute: true }
+];
+
 const Navbar = ({ onOpenAuth }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [activeLink, setActiveLink] = useState('#home');
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -27,35 +36,9 @@ const Navbar = ({ onOpenAuth }) => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Scroll Spy & Route handling
-    useEffect(() => {
-        // Set active link based on current route
-        const currentPath = location.pathname;
-        const matchingLink = navLinks.find(link =>
-            link.isRoute ? link.href === currentPath : false
-        );
-
-        if (matchingLink) {
-            setActiveLink(matchingLink.href);
-        } else if (currentPath === '/') {
-            setActiveLink('/');
-        }
-    }, [location.pathname]);
-
-    // Define navigation links for consistency
-    const navLinks = [
-        { name: 'Home', href: '/' },
-        { name: 'Platform', href: '/platform', isRoute: true },
-        { name: 'How It Works', href: '/how-it-works', isRoute: true },
-        { name: 'Careers', href: '/careers', isRoute: true },
-        { name: 'Parents', href: '/parents', isRoute: true },
-        { name: 'Students', href: '/students', isRoute: true }
-    ];
-
     const handleNavClick = (link) => {
         navigate(link.href);
         window.scrollTo(0, 0);
-        setActiveLink(link.href);
         setIsMobileMenuOpen(false);
     };
 
@@ -91,7 +74,7 @@ const Navbar = ({ onOpenAuth }) => {
                     {/* Navigation Links for Desktop */}
                     <div className="hidden md:flex items-center space-x-6">
                         {navLinks.map((link, idx) => {
-                            const isActive = activeLink === link.href;
+                            const isActive = location.pathname === link.href;
                             const colors = ['#FF9933', '#FFFFFF', '#138808', '#FF9933', '#FFFFFF', '#138808'];
                             const activeColor = colors[idx % colors.length];
 
@@ -159,7 +142,7 @@ const Navbar = ({ onOpenAuth }) => {
                             {navLinks.map((link) => (
                                 <button
                                     key={link.name}
-                                    className={`block w-full text-left font-medium py-2 text-sm ${activeLink === link.href ? 'text-white pl-2 border-l-2 custom-border-l' : 'text-gray-300 hover:text-white'}`}
+                                    className={`block w-full text-left font-medium py-2 text-sm ${location.pathname === link.href ? 'text-white pl-2 border-l-2 custom-border-l' : 'text-gray-300 hover:text-white'}`}
                                     onClick={() => handleNavClick(link)}
                                 >
                                     {link.name}

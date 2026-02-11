@@ -22,7 +22,7 @@ import './ContactSection.css';
  */
 const ContactSection = () => {
     return (
-        <section id="contact" className="py-20 bg-gradient-to-br from-blue-50 to-cyan-50">
+        <section id="contact" className="py-20 bg-[#E1F0FF]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Section Header */}
@@ -32,12 +32,13 @@ const ContactSection = () => {
                     viewport={{ once: true }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                        Get in <span className="bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">Touch</span>
+                    <h2 className="text-3xl md:text-5xl font-black mb-6 tracking-tight flex flex-col items-center justify-center italic uppercase">
+                        <span className="bg-gradient-to-r from-[#FF9933] via-gray-800 to-[#138808] bg-clip-text text-transparent">
+                            Get in Touch
+                        </span>
+                        <span className="text-gray-900 mt-2 block not-italic font-light">Ready to navigate your future?</span>
                     </h2>
-                    <p className="text-xl text-gray-600">
-                        Ready to navigate your future? Contact us today!
-                    </p>
+                    <div className="w-32 h-1.5 bg-gradient-to-r from-[#FF9933] via-white to-[#138808] mx-auto rounded-full shadow-sm border border-gray-100"></div>
                 </motion.div>
 
                 <div className="grid md:grid-cols-2 gap-8 md:gap-12">

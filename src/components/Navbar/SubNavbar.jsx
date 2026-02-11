@@ -7,49 +7,49 @@ import { motion, AnimatePresence } from 'framer-motion';
  * Provides secondary navigation for Home page sections.
  * Positioned below Hero section with dynamic color themes based on active section.
  */
+// Define sub-navigation links with their color themes
+const subNavLinks = [
+    {
+        name: 'About',
+        href: '#about',
+        bgGradient: 'linear-gradient(135deg, rgba(59, 130, 246, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%)',
+        textColor: 'text-blue-100',
+        activeColor: '#60A5FA',
+        borderColor: 'border-blue-700/50',
+        glowColor: 'rgba(96, 165, 250, 0.3)'
+    },
+    {
+        name: 'Features',
+        href: '#features',
+        bgGradient: 'linear-gradient(135deg, rgba(168, 85, 247, 0.95) 0%, rgba(147, 51, 234, 0.95) 100%)',
+        textColor: 'text-purple-100',
+        activeColor: '#C084FC',
+        borderColor: 'border-purple-700/50',
+        glowColor: 'rgba(192, 132, 252, 0.3)'
+    },
+    {
+        name: 'Modules',
+        href: '#modules',
+        bgGradient: 'linear-gradient(135deg, rgba(16, 185, 129, 0.95) 0%, rgba(5, 150, 105, 0.95) 100%)',
+        textColor: 'text-emerald-100',
+        activeColor: '#34D399',
+        borderColor: 'border-emerald-700/50',
+        glowColor: 'rgba(52, 211, 153, 0.3)'
+    },
+    {
+        name: 'Challenges',
+        href: '#challenges',
+        bgGradient: 'linear-gradient(135deg, rgba(251, 146, 60, 0.95) 0%, rgba(249, 115, 22, 0.95) 100%)',
+        textColor: 'text-orange-100',
+        activeColor: '#FB923C',
+        borderColor: 'border-orange-700/50',
+        glowColor: 'rgba(251, 146, 60, 0.3)'
+    }
+];
+
 const SubNavbar = () => {
     const [activeLink, setActiveLink] = useState('#about');
     const [isSticky, setIsSticky] = useState(false);
-
-    // Define sub-navigation links with their color themes
-    const subNavLinks = [
-        {
-            name: 'About',
-            href: '#about',
-            bgGradient: 'linear-gradient(135deg, rgba(59, 130, 246, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%)',
-            textColor: 'text-blue-100',
-            activeColor: '#60A5FA',
-            borderColor: 'border-blue-700/50',
-            glowColor: 'rgba(96, 165, 250, 0.3)'
-        },
-        {
-            name: 'Features',
-            href: '#features',
-            bgGradient: 'linear-gradient(135deg, rgba(168, 85, 247, 0.95) 0%, rgba(147, 51, 234, 0.95) 100%)',
-            textColor: 'text-purple-100',
-            activeColor: '#C084FC',
-            borderColor: 'border-purple-700/50',
-            glowColor: 'rgba(192, 132, 252, 0.3)'
-        },
-        {
-            name: 'Modules',
-            href: '#modules',
-            bgGradient: 'linear-gradient(135deg, rgba(16, 185, 129, 0.95) 0%, rgba(5, 150, 105, 0.95) 100%)',
-            textColor: 'text-emerald-100',
-            activeColor: '#34D399',
-            borderColor: 'border-emerald-700/50',
-            glowColor: 'rgba(52, 211, 153, 0.3)'
-        },
-        {
-            name: 'Challenges',
-            href: '#challenges',
-            bgGradient: 'linear-gradient(135deg, rgba(251, 146, 60, 0.95) 0%, rgba(249, 115, 22, 0.95) 100%)',
-            textColor: 'text-orange-100',
-            activeColor: '#FB923C',
-            borderColor: 'border-orange-700/50',
-            glowColor: 'rgba(251, 146, 60, 0.3)'
-        }
-    ];
 
     // Get current section theme
     const getCurrentTheme = () => {

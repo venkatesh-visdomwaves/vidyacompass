@@ -17,7 +17,7 @@ const FeaturesSection = () => {
     ];
 
     return (
-        <section id="features" className="py-12 bg-white relative overflow-hidden">
+        <section id="features" className="py-20 bg-[#E1F0FF] relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 <div className="lg:grid lg:grid-cols-2 gap-20 items-center">
@@ -28,11 +28,15 @@ const FeaturesSection = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                     >
-
-                        <h2 className="text-2xl md:text-3xl font-light text-slate-900 mb-8 tracking-tight">
-                            The <span className="text-primary-600 font-normal">Vidya-Compass</span> Advantage
+                        <h2 className="text-3xl md:text-5xl font-black mb-8 tracking-tight flex flex-col italic uppercase">
+                            <span className="bg-gradient-to-r from-[#FF9933] via-gray-800 to-[#138808] bg-clip-text text-transparent underline decoration-[#138808]">
+                                The Advantage
+                            </span>
+                            <span className="text-gray-900 mt-2 block not-italic font-light text-xl md:text-3xl tracking-[0.1em] uppercase">Precision Career Guidance</span>
                         </h2>
-                        <p className="text-sm md:text-base text-slate-500 leading-relaxed mb-10 font-light">
+                        <div className="w-32 h-1.5 bg-gradient-to-r from-[#FF9933] via-white to-[#138808] rounded-full shadow-sm border border-gray-100 mb-8"></div>
+
+                        <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-10 font-light text-justify">
                             {advantage.intro}
                         </p>
 

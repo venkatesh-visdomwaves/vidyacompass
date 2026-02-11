@@ -6,25 +6,43 @@ import {
     FaLinkedinIn,
     FaInstagram
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
-/**
- * Footer Component
- * 
- * Provides site-wide links, brand information, and legal disclaimers.
- * Features:
- * - Organized link columns.
- * - Social media links.
- * - Copyright and legal sub-links.
- */
 const Footer = () => {
-    // Navigation mapping for footer sections
-    const footerLinks = {
-        Platform: ['Features', 'Modules', 'Careers', 'Pricing'],
-        Support: ['Parents', 'Students', 'Contact', 'Help Center'],
-        Company: ['About Us', 'Blog', 'Resources', 'Press'],
-        Legal: ['Privacy Policy', 'Terms of Service', 'Disclaimer']
-    };
+    const footerSections = [
+        {
+            title: 'Platform',
+            links: [
+                { name: 'Platform', href: '/platform' },
+                { name: 'How It Works', href: '/how-it-works' },
+                { name: 'Careers', href: '/careers' }
+            ]
+        },
+        {
+            title: 'Support',
+            links: [
+                { name: 'Parents', href: '/parents' },
+                { name: 'Students', href: '/students' },
+                { name: 'Contact', href: '/contact' }
+            ]
+        },
+        {
+            title: 'Company',
+            links: [
+                { name: 'About Us', href: '/#about' },
+                { name: 'Blog', href: '#' },
+                { name: 'Resources', href: '#' }
+            ]
+        },
+        {
+            title: 'Legal',
+            links: [
+                { name: 'Privacy Policy', href: '#' },
+                { name: 'Terms of Service', href: '#' }
+            ]
+        }
+    ];
 
     return (
         <footer className="bg-black text-gray-400 border-t border-gray-900 relative">
@@ -66,18 +84,22 @@ const Footer = () => {
                     </div>
 
                     {/* Dynamic Link Columns Mapping */}
-                    {Object.entries(footerLinks).map(([category, links]) => (
-                        <div key={category} className="space-y-4">
+                    {footerSections.map((section) => (
+                        <div key={section.title} className="space-y-4">
                             <h4 className="text-white text-[10px] md:text-xs font-black uppercase tracking-widest border-b border-gray-900 pb-2 inline-block">
-                                {category}
+                                {section.title}
                             </h4>
                             <ul className="space-y-2 md:space-y-3">
-                                {links.map((link) => (
-                                    <li key={link}>
-                                        <a href="#" className="hover:text-white transition-colors text-xs md:text-sm inline-block group">
-                                            {link}
+                                {section.links.map((link) => (
+                                    <li key={link.name}>
+                                        <Link
+                                            to={link.href}
+                                            onClick={() => window.scrollTo(0, 0)}
+                                            className="hover:text-white transition-colors text-xs md:text-sm inline-block group"
+                                        >
+                                            {link.name}
                                             <span className="block h-[1px] w-0 bg-primary-500 group-hover:w-full transition-all duration-300"></span>
-                                        </a>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>

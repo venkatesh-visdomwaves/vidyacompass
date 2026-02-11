@@ -18,19 +18,23 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'signin' }) => {
     });
     const [errors, setErrors] = useState({});
 
-    // Reset mode and form when modal opens
-    useEffect(() => {
-        if (isOpen) {
-            setMode(initialMode);
-            resetForm();
-        }
-    }, [isOpen, initialMode]);
-
     const resetForm = () => {
         setFormData({ name: '', email: '', phone: '', password: '', confirmPassword: '', otp: '' });
         setErrors({});
         setVerificationMethod(null);
     };
+
+    // Reset mode and form when modal opens
+    useEffect(() => {
+        if (isOpen) {
+            // Use setTimeout to push state updates to next tick, avoiding "setState in effect" warnings
+            const timer = setTimeout(() => {
+                setMode(initialMode);
+                resetForm();
+            }, 0);
+            return () => clearTimeout(timer);
+        }
+    }, [isOpen, initialMode]);
 
     const handleModeSwitch = (newMode) => {
         setMode(newMode);
@@ -54,16 +58,23 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'signin' }) => {
         }
 
         if (mode !== 'verify') {
-            // Basic email validation for signin, signup, and forgotPassword (if verified via email)
-            // simplified: check email if it's filled or required
-            if ((mode === 'signup' || mode === 'signin' || (mode === 'forgotPassword' && !formData.phone))) {
-                if (!formData.email && !formData.phone && mode === 'forgotPassword') {
-                    // For forgot password, one is enough. logic handled in submit.
-                } else if (mode !== 'forgotPassword' && !formData.email) {
+            const emailRegex = /\S+@\S+\.\S+/;
+            const phoneRegex = /^\d{10}$/;
+
+            if (mode === 'signup') {
+                if (!formData.email) {
                     newErrors.email = 'Email Address is required';
-                } else if (formData.email && !/\S+@\S+\.\S+/.test(formData.email)) {
+                } else if (!emailRegex.test(formData.email)) {
                     newErrors.email = 'Email Address is invalid';
                 }
+
+                if (!formData.phone) {
+                    newErrors.phone = 'Mobile Number is required';
+                } else if (!phoneRegex.test(formData.phone)) {
+                    newErrors.phone = 'Mobile Number must be 10 digits';
+                }
+            } else if (mode === 'signin' && !formData.email) {
+                newErrors.email = 'Email Address is required';
             }
         }
 
@@ -111,14 +122,20 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'signin' }) => {
             console.log('Form Submitted', { mode, formData });
 
             if (mode === 'verify') {
-                alert('Verification Successful! You can now reset your password.');
-                handleModeSwitch('signin'); // In real app, go to ResetPassword mode
+                alert('Verification Successful!');
+                if (verificationMethod === 'signup') {
+                    alert('Successfully Signed Up!');
+                    onClose();
+                } else {
+                    handleModeSwitch('signin'); // In real app, go to ResetPassword mode
+                }
             } else if (mode === 'signin') {
                 alert('Successfully Signed In!');
                 onClose();
             } else if (mode === 'signup') {
-                alert('Successfully Signed Up!');
-                onClose();
+                setVerificationMethod('signup');
+                alert(`OTP sent to ${formData.phone} and ${formData.email}`);
+                handleModeSwitch('verify');
             }
         }
     };
@@ -139,7 +156,11 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'signin' }) => {
             case 'signin': return 'Please sign in to continue your journey';
             case 'signup': return 'Join Vidya Compass and start navigating your future';
             case 'forgotPassword': return 'Enter your details to receive a recovery code';
-            case 'verify': return `Enter the code sent to your ${verificationMethod || 'device'}`;
+            case 'verify':
+                if (verificationMethod === 'signup') {
+                    return `Enter the code sent to ${formData.email} or ${formData.phone}`;
+                }
+                return `Enter the code sent to your ${verificationMethod === 'sms' ? 'phone' : 'email'}`;
             default: return '';
         }
     };
@@ -214,10 +235,10 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'signin' }) => {
                                     </div>
                                 )}
 
-                                {/* Phone Field (Forgot Password Option) */}
-                                {mode === 'forgotPassword' && (
+                                {/* Phone Field (Signup or Forgot Password Option) */}
+                                {(mode === 'signup' || mode === 'forgotPassword') && (
                                     <div className="relative">
-                                        <div className="text-gray-500 text-center text-xs my-2">- OR -</div>
+                                        {mode === 'forgotPassword' && <div className="text-gray-500 text-center text-xs my-2">- OR -</div>}
                                         <div className="relative">
                                             <FaPhone className="absolute left-4 top-4 text-gray-500" />
                                             <input
@@ -225,9 +246,10 @@ const AuthModal = ({ isOpen, onClose, initialMode = 'signin' }) => {
                                                 name="phone"
                                                 value={formData.phone}
                                                 onChange={handleChange}
-                                                placeholder="Phone Number (for SMS)"
+                                                placeholder={mode === 'signup' ? "Mobile Number" : "Phone Number (for SMS)"}
                                                 className={`w-full bg-white/5 border ${errors.phone ? 'border-red-500' : 'border-white/10'} rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:border-primary-500 focus:outline-none transition-all`}
                                             />
+                                            {errors.phone && <p className="text-red-500 text-xs mt-1 ml-2">{errors.phone}</p>}
                                         </div>
                                     </div>
                                 )}
