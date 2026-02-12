@@ -1,160 +1,188 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaRocket, FaLightbulb, FaUserAstronaut, FaGamepad, FaRobot, FaCrown } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import {
+    FaCompass, FaGlobeAmericas, FaRoute, FaWallet, FaBrain,
+    FaArrowRight, FaRobot, FaChartLine, FaCheckCircle, FaUserGraduate,
+    FaChevronRight, FaLightbulb, FaShieldAlt, FaRocket
+} from 'react-icons/fa';
 
-const journeySteps = [
+const studentPillars = [
     {
-        icon: <FaLightbulb />,
-        title: "Spark",
-        desc: "Discover your hidden talents through fun, interactive quests.",
-        color: "bg-amber-400"
+        icon: <FaCompass className="text-[#FF9933]" />,
+        title: "Find Your Career",
+        desc: "Take a simple test to find which jobs match your personality and interests.",
+        link: "/students/career-discovery",
+        benefit: "Stop guessing and start knowing what job is perfect for you."
     },
     {
-        icon: <FaRobot />,
-        title: "Sync",
-        desc: "Connect your personality with our AI to map your ideal future.",
-        color: "bg-blue-400"
+        icon: <FaGlobeAmericas className="text-[#138808]" />,
+        title: "Study Abroad",
+        desc: "Compare costs, colleges, and scholarships in over 50 countries easily.",
+        link: "/students/global-explorer",
+        benefit: "Find the best education that fits your budget."
     },
     {
-        icon: <FaRocket />,
-        title: "Sprint",
-        desc: "Launch your career roadmap with actionable daily milestones.",
-        color: "bg-rose-400"
+        icon: <FaRoute className="text-[#FF9933]" />,
+        title: "Your 5-Year Plan",
+        desc: "Get a clear, year-by-year guide from school to your first big job.",
+        link: "/students/roadmap",
+        benefit: "Know exactly what to do every year to succeed."
+    },
+    {
+        icon: <FaWallet className="text-[#138808]" />,
+        title: "Money & Loans",
+        desc: "See how much college costs and find easy ways to get loans and grants.",
+        link: "/students/financial-planning",
+        benefit: "Plan your payments without any stress or confusion."
+    },
+    {
+        icon: <FaBrain className="text-[#FF9933]" />,
+        title: "Job Market News",
+        desc: "See which jobs are growing and how much money you can earn in the future.",
+        link: "/students/career-intelligence",
+        benefit: "Choose a career that will pay well and stay in demand."
     }
 ];
 
 const StudentsPage = () => {
     return (
-        <div className="pt-24 bg-[#E1F0FF] min-h-screen overflow-hidden">
-            {/* Student Hero Section */}
-            <div className="relative max-w-7xl mx-auto px-6 py-24 flex flex-col items-center text-center">
-                <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="flex items-center gap-2 mb-10 bg-white border border-gray-100 px-6 py-3 rounded-full shadow-sm"
-                >
-                    <FaCrown className="text-yellow-500" />
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#138808]">Future Explorer Mode</span>
-                </motion.div>
+        <div className="bg-white min-h-screen pt-16">
+            {/* Simple Hero Section */}
+            <section className="relative py-20 px-6 overflow-hidden bg-white">
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#138808]/5 rounded-full blur-[100px] -mr-48 -mt-24"></div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mb-12"
-                >
-                    <h1 className="text-3xl md:text-5xl lg:text-7xl font-black mb-8 tracking-tight flex flex-col items-center justify-center italic uppercase leading-none">
-                        <span className="bg-gradient-to-r from-[#FF9933] via-gray-800 to-[#138808] bg-clip-text text-transparent">
-                            Student Elevation
-                        </span>
-                        <span className="text-gray-900 mt-4 block not-italic font-light text-xl md:text-3xl tracking-[0.2em] uppercase">Your Potential, Unlocked.</span>
-                    </h1>
-                    <div className="w-48 h-2 bg-gradient-to-r from-[#FF9933] via-white to-[#138808] mx-auto rounded-full shadow-sm border border-gray-100"></div>
-                </motion.div>
-
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="text-xl md:text-2xl text-gray-600 font-light max-w-4xl mb-16 leading-relaxed"
-                >
-                    Turn your future into an adventure. Discover your unique cognitive fingerprint through interactive experiences and build a roadmap to your dream career.
-                </motion.p>
-
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-12 py-6 bg-gradient-to-r from-[#FF9933] via-gray-800 to-[#138808] text-white rounded-[2rem] font-black text-xl shadow-2xl flex items-center gap-4 group"
-                >
-                    Start Exploration <FaGamepad className="group-hover:rotate-12 transition-transform" />
-                </motion.button>
-            </div>
-
-            {/* Journey Grid */}
-            <div className="max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-                {journeySteps.map((step, i) => (
-                    <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.2 }}
-                        className="p-10 rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-sm relative group hover:bg-white/10 transition-all"
-                    >
-                        <div className={`w-16 h-16 ${step.color} rounded-2xl flex items-center justify-center text-2xl text-white mb-8 shadow-2xl group-hover:scale-110 transition-transform`}>
-                            {step.icon}
-                        </div>
-                        <h3 className="text-3xl font-bold mb-4">{step.title}</h3>
-                        <p className="text-slate-400 leading-relaxed font-light text-lg">{step.desc}</p>
-
-                        {/* Decorative number */}
-                        <span className="absolute top-10 right-10 text-6xl font-black text-white/5 pointer-events-none">0{i + 1}</span>
-                    </motion.div>
-                ))}
-            </div>
-
-            {/* Avatar / Dashboard Preview */}
-            <div className="max-w-7xl mx-auto px-6 py-32 border-t border-white/5">
-                <div className="grid md:grid-cols-2 gap-24 items-center">
-                    <div>
-                        <motion.h2
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            className="text-4xl md:text-6xl font-black mb-8 italic"
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 relative z-10">
+                    <div className="flex-1 text-left">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="inline-flex items-center gap-2 px-3 py-1 bg-gray-50 border border-gray-100 text-[10px] font-bold uppercase tracking-widest text-[#138808] mb-6 rounded-lg"
                         >
-                            Your Digital <br />
-                            <span className="text-primary-400 underline decoration-primary-800">Ascension.</span>
-                        </motion.h2>
-                        <div className="space-y-10">
-                            {[
-                                { title: "Skill Trees", desc: "Unlock skills in tech, design, or leadership as you progress." },
-                                { title: "Quest Board", desc: "Real-world internships and challenges tailored to your profile." },
-                                { title: "Nexus Forge", desc: "Connect with mentors who've already beaten the level you're on." }
-                            ].map((item, i) => (
-                                <div key={i} className="flex gap-6 group">
-                                    <div className="w-1 h-16 bg-white/10 group-hover:bg-primary-500 transition-colors"></div>
-                                    <div>
-                                        <h4 className="text-xl font-bold mb-2 group-hover:text-primary-400 transition-colors">{item.title}</h4>
-                                        <p className="text-slate-500 font-light">{item.desc}</p>
-                                    </div>
-                                </div>
-                            ))}
+                            For Every Student
+                        </motion.div>
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-4xl md:text-6xl font-black text-gray-900 mb-8 leading-tight italic uppercase"
+                        >
+                            Build Your <br />
+                            <span className="text-[#138808]">Future Career.</span>
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-lg text-gray-500 mb-10 max-w-xl leading-relaxed font-medium"
+                        >
+                            We help you find the right path, pick the best college, and plan your success with simple tools and clear advice.
+                        </motion.p>
+                        <div className="flex flex-wrap gap-4">
+                            <Link to="/students/career-discovery" className="px-8 py-4 bg-gray-900 text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-[#138808] transition-all flex items-center gap-2 shadow-xl">
+                                Start Here <FaArrowRight size={10} />
+                            </Link>
+                            <a href="#features" className="px-8 py-4 bg-white text-gray-900 border border-gray-200 rounded-xl font-bold text-xs uppercase tracking-widest hover:border-[#FF9933] transition-all">
+                                See Features
+                            </a>
                         </div>
                     </div>
 
-                    <div className="relative group">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/30 to-rose-500/30 blur-[100px] animate-pulse"></div>
-                        <div className="relative p-12 bg-white/5 border border-white/10 rounded-[4rem] backdrop-blur-2xl shadow-2xl overflow-hidden">
-                            <div className="flex flex-col items-center mb-12">
-                                <div className="w-40 h-40 rounded-full border-4 border-primary-500/50 p-2 mb-6">
-                                    <div className="w-full h-full bg-slate-800 rounded-full flex items-center justify-center text-5xl">
-                                        <FaUserAstronaut className="text-primary-200" />
+                    <div className="flex-1 relative">
+                        <div className="relative p-10 bg-gray-900 rounded-[3rem] shadow-2xl overflow-hidden border border-white/5">
+                            <div className="relative z-10">
+                                <h4 className="text-white font-bold text-lg mb-8 italic">How We Help You:</h4>
+                                <div className="space-y-6">
+                                    <div className="flex items-start gap-4 p-4 bg-white/5 rounded-2xl border border-white/5">
+                                        <div className="p-3 bg-[#138808]/20 text-[#138808] rounded-xl"><FaCheckCircle /></div>
+                                        <div>
+                                            <p className="text-white font-bold text-sm">Clear Direction</p>
+                                            <p className="text-gray-500 text-[10px] font-medium mt-1 uppercase tracking-wider">No more confusion about what to study.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-4 p-4 bg-white/5 rounded-2xl border border-white/5 text-left">
+                                        <div className="p-3 bg-[#FF9933]/20 text-[#FF9933] rounded-xl"><FaShieldAlt /></div>
+                                        <div>
+                                            <p className="text-white font-bold text-sm">Safe Planning</p>
+                                            <p className="text-gray-500 text-[10px] font-medium mt-1 uppercase tracking-wider">Know the costs before you spend any money.</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <h3 className="text-2xl font-bold">Commander Alex</h3>
-                                <p className="text-primary-400 font-bold tracking-widest uppercase text-xs">Level 42 Architect</p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                            <div className="space-y-6">
-                                {["Logic", "Creativity", "Resilience"].map((stat, i) => (
-                                    <div key={i}>
-                                        <div className="flex justify-between text-xs font-bold mb-2 uppercase tracking-widest text-slate-400">
-                                            <span>{stat}</span>
-                                            <span>{85 + i * 5}%</span>
+            {/* Pillar Grid - Feature Section */}
+            <section id="features" className="py-24 px-6 bg-gray-50">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-20">
+                        <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6 uppercase italic">Our 5 Main Tools</h2>
+                        <p className="text-gray-500 max-w-xl mx-auto font-medium text-base">Simple blocks to help you reach your goals.</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
+                        {studentPillars.map((pillar, idx) => (
+                            <Link
+                                key={idx}
+                                to={pillar.link}
+                                className="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all h-full flex flex-col group"
+                            >
+                                <div className="w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center text-2xl mb-8 group-hover:bg-gray-900 group-hover:text-white transition-all">
+                                    {pillar.icon}
+                                </div>
+                                <h3 className="text-base font-bold text-gray-900 mb-3 leading-tight uppercase">{pillar.title}</h3>
+                                <p className="text-[11px] text-gray-400 leading-relaxed font-medium mb-6 flex-1">{pillar.desc}</p>
+
+                                <div className="pt-6 border-t border-gray-50 mt-auto">
+                                    <p className="text-[9px] font-black text-[#138808] uppercase tracking-widest mb-1 italic">The Benefit:</p>
+                                    <p className="text-[10px] text-gray-500 font-medium leading-tight">{pillar.benefit}</p>
+                                </div>
+
+                                <div className="mt-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#FF9933] group-hover:gap-3 transition-all">
+                                    Open Tool <FaChevronRight size={8} />
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* New "How it works" section in Simple English */}
+            <section className="py-24 px-6 bg-white">
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex flex-col lg:flex-row items-center gap-20">
+                        <div className="flex-1">
+                            <h2 className="text-3xl font-black text-gray-900 mb-8 uppercase italic">Ready to Begin?</h2>
+                            <div className="space-y-8">
+                                {[
+                                    { title: "1. Take the Test", desc: "Spend 5 minutes answering simple questions about yourself.", icon: <FaLightbulb /> },
+                                    { title: "2. Get your Match", desc: "See which careers fit you best based on your answers.", icon: <FaBrain /> },
+                                    { title: "3. Follow the Guide", desc: "Use our step-by-step plan to reach your selected career.", icon: <FaRocket /> }
+                                ].map((step, i) => (
+                                    <div key={i} className="flex gap-6 items-start group">
+                                        <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center text-[#138808] border border-gray-100 group-hover:bg-[#138808] group-hover:text-white transition-all">
+                                            {step.icon}
                                         </div>
-                                        <div className="h-1.5 w-full bg-white/5 rounded-full">
-                                            <motion.div
-                                                initial={{ width: 0 }}
-                                                whileInView={{ width: `${85 + i * 5}%` }}
-                                                className="h-full bg-primary-500 rounded-full shadow-[0_0_10px_rgba(0,112,243,0.5)]"
-                                            ></motion.div>
+                                        <div>
+                                            <h4 className="font-bold text-lg text-gray-900">{step.title}</h4>
+                                            <p className="text-gray-500 text-sm font-medium mt-1">{step.desc}</p>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                         </div>
+                        <div className="flex-1 bg-gray-50 p-12 rounded-[3rem] border border-gray-100 text-center">
+                            <FaUserGraduate className="text-5xl text-[#138808] mx-auto mb-8" />
+                            <h3 className="text-2xl font-black mb-6 uppercase italic">Join 10,000+ Students</h3>
+                            <p className="text-gray-500 mb-10 font-medium">Over 10,000 students have used these tools to find their dream careers and colleges.</p>
+                            <Link to="/students/career-discovery" className="block w-full py-5 bg-[#138808] text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-[#FF9933] transition-all shadow-lg">
+                                Get Your Free Guide Now
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     );
 };

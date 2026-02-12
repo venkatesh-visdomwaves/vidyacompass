@@ -1,145 +1,210 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaShieldAlt, FaComments, FaChartPie, FaMobileAlt, FaUserGraduate, FaHandshake } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import {
+    FaChartPie, FaWallet, FaShieldAlt, FaComments,
+    FaArrowRight, FaCheckCircle, FaUserShield, FaHandshake,
+    FaChevronRight, FaLightbulb, FaRocket, FaUserGraduate, FaChartLine
+} from 'react-icons/fa';
+import ParentSubNavbar from '../components/Navbar/ParentSubNavbar';
 
-const values = [
+const parentPillars = [
     {
-        icon: <FaShieldAlt />,
-        title: "Safe & Private",
-        description: "Your child's developmental data is encrypted and never shared with third parties. Privacy is our core foundation."
+        icon: <FaChartPie className="text-[#1e3a8a]" />,
+        title: "Student Dashboard",
+        desc: "Monitor your child's grades, skills, and job readiness in one simple view.",
+        link: "/parents/dashboard",
+        benefit: "Stay informed without asking a hundred questions."
     },
     {
-        icon: <FaChartPie />,
-        title: "Progress Tracking",
-        description: "Get weekly insights into your child's evolving interests, skills development, and potential career matches."
+        icon: <FaWallet className="text-[#138808]" />,
+        title: "Financial Planning",
+        desc: "Estimate total costs, plan budgets, and find low-interest student loans.",
+        link: "/parents/financial-support",
+        benefit: "Remove the stress of big education costs."
     },
     {
-        icon: <FaHandshake />,
+        icon: <FaShieldAlt className="text-[#FF9933]" />,
+        title: "Risk & Safety",
+        desc: "Check country safety scores, visa rules, and cultural lifestyle guides.",
+        link: "/parents/risk-safety",
+        benefit: "Ensure your child is safe and happy abroad."
+    },
+    {
+        icon: <FaComments className="text-[#1e3a8a]" />,
         title: "Expert Guidance",
-        description: "Access curated resources to help you support your child's unique journey without being overbearing."
-    },
-    {
-        icon: <FaMobileAlt />,
-        title: "Parent Dashboard",
-        description: "A dedicated interface for parents to monitor milestones and financial planning for higher education."
+        desc: "Talk to expert counselors about pathways, PR, and career security.",
+        link: "/parents/expert-guidance",
+        benefit: "Get professional advice tailored to your family goals."
     }
 ];
 
 const ParentsPage = () => {
     return (
-        <div className="pt-24 bg-[#E1F0FF] min-h-screen">
-            {/* Hero Section */}
-            <div className="max-w-7xl mx-auto px-6 py-20 flex flex-col items-center text-center">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="w-20 h-20 rounded-3xl bg-white border border-gray-100 flex items-center justify-center text-3xl text-primary-600 mb-10 shadow-lg"
-                >
-                    <FaUserGraduate />
-                </motion.div>
+        <div className="bg-white min-h-screen pt-16">
+            <ParentSubNavbar />
 
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mb-12"
-                >
-                    <h1 className="text-3xl md:text-5xl lg:text-7xl font-black mb-8 tracking-tight flex flex-col items-center justify-center italic uppercase leading-none">
-                        <span className="bg-gradient-to-r from-[#FF9933] via-gray-800 to-[#138808] bg-clip-text text-transparent">
-                            Parent Partnership
-                        </span>
-                        <span className="text-gray-900 mt-4 block not-italic font-light text-xl md:text-3xl tracking-[0.2em] uppercase">The Science of Your Child's Success</span>
-                    </h1>
-                    <div className="w-48 h-2 bg-gradient-to-r from-[#FF9933] via-white to-[#138808] mx-auto rounded-full shadow-sm border border-gray-100"></div>
-                </motion.div>
+            {/* Simple Hero Section */}
+            <section className="relative py-24 px-6 overflow-hidden bg-white">
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#1e3a8a]/5 rounded-full blur-[100px] -mr-48 -mt-24"></div>
 
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="text-xl md:text-2xl text-gray-600 font-light max-w-4xl mx-auto leading-relaxed text-center"
-                >
-                    We bridge the gap between parental aspirations and student potential with data-driven clarity and emotional intelligence.
-                </motion.p>
-            </div>
-
-            {/* Values Grid */}
-            <div className="max-w-7xl mx-auto px-6 py-24 border-t border-slate-50">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-                    {values.map((v, i) => (
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 relative z-10">
+                    <div className="flex-1 text-left">
                         <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className="flex flex-col items-start"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="inline-flex items-center gap-2 px-3 py-1 bg-gray-50 border border-gray-100 text-[10px] font-bold uppercase tracking-widest text-[#1e3a8a] mb-6 rounded-lg"
                         >
-                            <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-xl text-primary-600 mb-6 shadow-sm">
-                                {v.icon}
-                            </div>
-                            <h3 className="text-xl font-bold mb-4 text-slate-900">{v.title}</h3>
-                            <p className="text-slate-500 leading-relaxed font-light">{v.description}</p>
+                            <FaUserShield /> For Modern Parents
                         </motion.div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Testimonial / Story Section */}
-            <div className="bg-primary-900 py-32 text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
-
-                <div className="max-w-5xl mx-auto px-6 relative z-10">
-                    <div className="grid md:grid-cols-2 gap-20 items-center">
-                        <div className="relative">
-                            <div className="aspect-[4/5] rounded-[3rem] bg-slate-800 border border-white/10 overflow-hidden shadow-2xl">
-                                <img src="https://images.unsplash.com/photo-1544717297-fa154da09f9b?auto=format&fit=crop&q=80&w=1000" alt="Parent and student" className="w-full h-full object-cover opacity-80" />
-                            </div>
-                            <div className="absolute -bottom-8 -right-8 p-8 bg-white text-slate-900 rounded-[2rem] shadow-2xl max-w-xs">
-                                <FaComments className="text-primary-500 text-2xl mb-4" />
-                                <p className="italic font-light mb-4 text-sm">"Vidya Compass changed our family dynamic. Instead of arguing about his future, we now have data to discuss together."</p>
-                                <p className="font-bold text-xs">— Samantha R., Parent</p>
-                            </div>
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-4xl md:text-7xl font-black text-gray-900 mb-8 leading-tight italic uppercase"
+                        >
+                            Empower Your <br />
+                            <span className="text-[#1e3a8a]">Child’s Future.</span>
+                        </motion.h1>
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-xl text-gray-500 mb-10 max-w-xl leading-relaxed font-medium"
+                        >
+                            Track progress, plan finances, and make confident global education decisions with data and clarity.
+                        </motion.p>
+                        <div className="flex flex-wrap gap-4">
+                            <Link to="/parents/dashboard" className="px-10 py-5 bg-[#1e3a8a] text-white rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-[#FF9933] transition-all flex items-center gap-3 shadow-xl">
+                                View Dashboard <FaArrowRight size={10} />
+                            </Link>
+                            <a href="#features" className="px-10 py-5 bg-white text-gray-900 border border-gray-200 rounded-2xl font-bold text-xs uppercase tracking-widest hover:border-[#1e3a8a] transition-all">
+                                Explore Planning Tools
+                            </a>
                         </div>
+                    </div>
 
-                        <div>
-                            <h2 className="text-3xl md:text-5xl font-bold mb-8 leading-tight">Decisions based on <br /><span className="text-primary-400">Insights, not Pressure.</span></h2>
-                            <p className="text-xl text-primary-100/70 mb-10 font-light leading-relaxed">
-                                Most career decisions are based on traditional prestige or social trends. Vidya Compass uses neuro-cognitive profiling to reveal what will truly make your child thrive in the 21st century.
-                            </p>
-                            <ul className="space-y-6">
-                                {[
-                                    "Financial ROI analysis for universities",
-                                    "Mental well-being compatibility checks",
-                                    "Work-life balance predictions",
-                                    "Future-proof skill gap analysis"
-                                ].map((item, i) => (
-                                    <li key={i} className="flex items-center gap-4 text-primary-50 font-medium">
-                                        <div className="w-2 h-2 rounded-full bg-primary-400"></div>
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
+                    <div className="flex-1 relative">
+                        <div className="relative p-1 bg-gradient-to-br from-gray-100 to-white rounded-[3.5rem] shadow-2xl overflow-hidden border border-gray-100">
+                            <div className="bg-white p-10 rounded-[3.1rem]">
+                                <div className="flex justify-between items-center mb-10">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-xl bg-[#1e3a8a]/10 flex items-center justify-center text-[#1e3a8a]"><FaChartLine /></div>
+                                        <span className="text-xs font-black uppercase tracking-widest text-gray-900">Success Index</span>
+                                    </div>
+                                    <span className="text-[10px] font-black uppercase text-[#138808] bg-[#138808]/10 px-3 py-1 rounded-lg">Above Average</span>
+                                </div>
+                                <div className="space-y-8">
+                                    <div>
+                                        <div className="flex justify-between text-[8px] font-bold uppercase text-gray-400 mb-3 tracking-[0.2em]">
+                                            <span>Academic Progress</span>
+                                            <span className="text-[#1e3a8a]">88%</span>
+                                        </div>
+                                        <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden border border-gray-100">
+                                            <div className="h-full bg-[#1e3a8a] w-[88%]"></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="flex justify-between text-[8px] font-bold uppercase text-gray-400 mb-3 tracking-[0.2em]">
+                                            <span>Job Readiness</span>
+                                            <span className="text-[#FF9933]">72%</span>
+                                        </div>
+                                        <div className="h-2 w-full bg-gray-50 rounded-full overflow-hidden border border-gray-100">
+                                            <div className="h-full bg-[#FF9933] w-[72%]"></div>
+                                        </div>
+                                    </div>
+                                    <div className="pt-6 border-t border-gray-50 flex items-center gap-4">
+                                        <div className="flex -space-x-2">
+                                            {[1, 2, 3].map(i => <div key={i} className="w-6 h-6 rounded-full bg-gray-100 border-2 border-white"></div>)}
+                                        </div>
+                                        <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest">3 Expert Advisors Connected</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            {/* FAQ Preview */}
-            <div className="max-w-3xl mx-auto px-6 py-32 text-center">
-                <h2 className="text-4xl font-bold mb-16 text-slate-900">Have Questions?</h2>
-                <div className="space-y-6 text-left">
-                    {[
-                        { q: "Is the technology biased?", a: "Our AI is trained on diverse global datasets to ensure neutrality across cultures and backgrounds." },
-                        { q: "How early can we start?", a: "We recommend starting from grade 8 to build a robust developmental profile early on." },
-                        { q: "Can I manage multiple children?", a: "Yes, the parent dashboard supports multi-profile management under one account." }
-                    ].map((faq, i) => (
-                        <div key={i} className="p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl transition-all group">
-                            <h4 className="text-lg font-bold mb-3 text-slate-900 group-hover:text-primary-600 transition-colors uppercase tracking-tight">{faq.q}</h4>
-                            <p className="text-slate-500 font-light text-sm">{faq.a}</p>
-                        </div>
+            {/* 4 Pillars Grid */}
+            <section id="features" className="py-24 px-6 bg-gray-50">
+                <div className="max-w-7xl mx-auto text-center mb-20">
+                    <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6 uppercase italic">The Parent Portal</h2>
+                    <p className="text-gray-500 max-w-xl mx-auto font-medium text-lg">Support your child's journey with security and data.</p>
+                </div>
+
+                <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {parentPillars.map((pillar, i) => (
+                        <Link
+                            key={i}
+                            to={pillar.link}
+                            className="bg-white p-10 rounded-[3rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all h-full flex flex-col group relative overflow-hidden"
+                        >
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-[#1e3a8a]/5 rounded-full -mr-12 -mt-12 transition-all group-hover:scale-150 group-hover:bg-[#1e3a8a]/10"></div>
+
+                            <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center text-3xl mb-10 group-hover:bg-[#1e3a8a] group-hover:text-white transition-all relative z-10">
+                                {pillar.icon}
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-4 leading-tight uppercase relative z-10">{pillar.title}</h3>
+                            <p className="text-sm text-gray-400 leading-relaxed font-medium mb-10 flex-1 relative z-10">{pillar.desc}</p>
+
+                            <div className="pt-8 border-t border-gray-50 mt-auto relative z-10">
+                                <p className="text-[10px] font-black text-[#1e3a8a] uppercase tracking-widest mb-2 italic">How it helps:</p>
+                                <p className="text-xs text-gray-500 font-medium leading-normal">{pillar.benefit}</p>
+                            </div>
+
+                            <div className="mt-8 flex items-center gap-3 text-xs font-black uppercase tracking-widest text-[#FF9933] group-hover:gap-5 transition-all relative z-10">
+                                Explore <FaChevronRight size={10} />
+                            </div>
+                        </Link>
                     ))}
                 </div>
-            </div>
+            </section>
+
+            {/* How it Works Section */}
+            <section className="py-32 px-6 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-24">
+                        <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6 uppercase italic">How It Works</h2>
+                        <p className="text-gray-500 font-medium text-lg">Four simple steps to peace of mind.</p>
+                    </div>
+
+                    <div className="relative">
+                        {/* Connection Line */}
+                        <div className="absolute top-1/2 left-0 w-full h-0.5 bg-gray-100 -translate-y-1/2 hidden lg:block"></div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 relative z-10">
+                            {[
+                                { title: "Connect Profile", desc: "Easily link with your student's account with one click.", icon: <FaHandshake /> },
+                                { title: "Track Progress", desc: "Get live updates on grades, attendance, and skills.", icon: <FaChartLine /> },
+                                { title: "Analyze Plan", desc: "Review budget forecasts and scholarship options.", icon: <FaWallet /> },
+                                { title: "Smart Decisions", desc: "Pick the best global path with expert safety data.", icon: <FaCheckCircle /> }
+                            ].map((step, i) => (
+                                <div key={i} className="flex flex-col items-center text-center group">
+                                    <div className="w-20 h-20 rounded-3xl bg-white border-2 border-gray-100 flex items-center justify-center text-2xl text-[#1e3a8a] mb-8 shadow-sm group-hover:border-[#FF9933] transition-all group-hover:-translate-y-2">
+                                        <div className="absolute top-0 right-0 w-8 h-8 bg-gray-900 text-white text-[10px] font-black flex items-center justify-center rounded-tr-2xl rounded-bl-2xl">0{i + 1}</div>
+                                        {step.icon}
+                                    </div>
+                                    <h4 className="text-xl font-black text-gray-900 mb-4 uppercase italic">{step.title}</h4>
+                                    <p className="text-sm text-gray-400 font-medium leading-relaxed px-4">{step.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Call to Action for Parents */}
+            <section className="py-24 px-6 bg-gray-50">
+                <div className="max-w-5xl mx-auto bg-[#1e3a8a] rounded-[4rem] p-16 text-center text-white relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+                    <div className="relative z-10">
+                        <FaUserGraduate className="text-6xl text-white/20 mx-auto mb-10" />
+                        <h2 className="text-3xl md:text-5xl font-black mb-10 uppercase italic leading-tight">Investment in <br /> <span className="text-[#FF9933]">Success</span></h2>
+                        <p className="text-white/70 text-lg mb-12 max-w-2xl mx-auto font-medium">Join thousands of parents who have moved from questioning to supporting with Vidya Compass.</p>
+                        <button className="px-12 py-5 bg-white text-[#1e3a8a] rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-[#FF9933] hover:text-white transition-all shadow-2xl">Create Parent Account</button>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 };

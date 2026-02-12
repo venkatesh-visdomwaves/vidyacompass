@@ -8,6 +8,15 @@ import PlatformPage from './pages/PlatformPage';
 import CareersPage from './pages/CareersPage';
 import ParentsPage from './pages/ParentsPage';
 import StudentsPage from './pages/StudentsPage';
+import CareerDiscovery from './pages/students/CareerDiscovery';
+import GlobalExplorer from './pages/students/GlobalExplorer';
+import Roadmap from './pages/students/Roadmap';
+import FinancialPlanning from './pages/students/FinancialPlanning';
+import CareerIntelligence from './pages/students/CareerIntelligence';
+import ProgressDashboard from './pages/parents/ProgressDashboard';
+import FinancialSupport from './pages/parents/FinancialSupport';
+import RiskSafety from './pages/parents/RiskSafety';
+import ExpertGuidance from './pages/parents/ExpertGuidance';
 import Footer from './components/Footer/Footer';
 import AICompanion from './components/Companion/AICompanion';
 import AuthModal from './components/Auth/AuthModal';
@@ -44,6 +53,16 @@ const App = () => {
             <Route path="/careers" element={<CareersPage />} />
             <Route path="/parents" element={<ParentsPage />} />
             <Route path="/students" element={<StudentsPage />} />
+            <Route path="/students/career-discovery" element={<CareerDiscovery />} />
+            <Route path="/students/global-explorer" element={<GlobalExplorer />} />
+            <Route path="/students/roadmap" element={<Roadmap />} />
+            <Route path="/students/financial-planning" element={<FinancialPlanning />} />
+            <Route path="/students/career-intelligence" element={<CareerIntelligence />} />
+            <Route path="/parents/dashboard" element={<ProgressDashboard />} />
+            <Route path="/parents/financial-support" element={<FinancialSupport />} />
+            <Route path="/parents/risk-safety" element={<RiskSafety />} />
+            <Route path="/parents/expert-guidance" element={<ExpertGuidance />} />
+            <Route path="*" element={<HomePage onOpenAuth={openAuth} />} />
           </Routes>
         </main>
 
