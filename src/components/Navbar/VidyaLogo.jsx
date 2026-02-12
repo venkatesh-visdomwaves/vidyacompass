@@ -12,7 +12,7 @@ const VidyaLogo = ({ className = "w-10 h-10 md:w-12 md:h-12" }) => {
                 className="w-full h-full object-contain"
             />
 
-            // ab
+            
         </motion.div>
     );
 };
