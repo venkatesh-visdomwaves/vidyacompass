@@ -80,31 +80,24 @@ const Navbar = ({ onOpenAuth }) => {
                         <VidyaLogo />
                         <div className="flex flex-col items-start gap-0 ml-1">
                             <h1 className="text-xl md:text-2xl font-bold tracking-tighter leading-none italic uppercase">
-                                <span className="bg-gradient-to-r from-[#FF9933] via-white to-[#138808] bg-clip-text text-transparent drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                                <span className="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
                                     Vidya
                                 </span>
-                                <span className="ml-1 text-white opacity-90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+                                <span className="ml-1 text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
                                     Compass
                                 </span>
                             </h1>
 
-                            {/* Wave Animation for Tagline */}
-                            <div className="flex flex-row mt-1 ml-0.5 pt-1 pb-1">
+                            {/* Tagline - Stable */}
+                            <div className="flex flex-row ml-0.5 mt-[2px]">
                                 {"Navigate Your Future".split("").map((char, index) => (
-                                    <motion.span
+                                    <span
                                         key={index}
                                         className="text-[7px] md:text-[9px] text-white font-bold uppercase tracking-[0.2em] leading-none inline-block origin-bottom"
-                                        animate={{ y: [0, -3, 0] }}
-                                        transition={{
-                                            duration: 2,
-                                            repeat: Infinity,
-                                            ease: "easeInOut",
-                                            delay: index * 0.1
-                                        }}
                                         style={{ marginRight: char === " " ? "4px" : "0" }}
                                     >
                                         {char}
-                                    </motion.span>
+                                    </span>
                                 ))}
                             </div>
                         </div>

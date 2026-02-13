@@ -39,7 +39,7 @@ const HowItWorksPage = () => {
     return (
         <div className="pt-16 bg-[#E1F0FF] min-h-screen">
             <HowItWorksHero />
-            
+
             <div className="max-w-6xl mx-auto px-6 py-16">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
