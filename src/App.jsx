@@ -17,10 +17,18 @@ import ProgressDashboard from './pages/parents/ProgressDashboard';
 import FinancialSupport from './pages/parents/FinancialSupport';
 import RiskSafety from './pages/parents/RiskSafety';
 import ExpertGuidance from './pages/parents/ExpertGuidance';
+
+// Careers Sub-pages
+import ResumeBuilder from './pages/careers/ResumeBuilder';
+import Applications from './pages/careers/Applications';
+import SkillAnalysis from './pages/careers/SkillAnalysis';
+import MarketIntelligence from './pages/careers/MarketIntelligence';
+
 import Footer from './components/Footer/Footer';
 import AICompanion from './components/Companion/AICompanion';
 import AuthModal from './components/Auth/AuthModal';
 import './App.css';
+
 
 /**
  * Main App Component
@@ -62,7 +70,15 @@ const App = () => {
             <Route path="/parents/financial-support" element={<FinancialSupport />} />
             <Route path="/parents/risk-safety" element={<RiskSafety />} />
             <Route path="/parents/expert-guidance" element={<ExpertGuidance />} />
+
+            {/* Career Sub-routes */}
+            <Route path="/careers/resume-builder" element={<ResumeBuilder />} />
+            <Route path="/careers/applications" element={<Applications />} />
+            <Route path="/careers/skill-analysis" element={<SkillAnalysis />} />
+            <Route path="/careers/market-intelligence" element={<MarketIntelligence />} />
+
             <Route path="*" element={<HomePage onOpenAuth={openAuth} />} />
+
           </Routes>
         </main>
 

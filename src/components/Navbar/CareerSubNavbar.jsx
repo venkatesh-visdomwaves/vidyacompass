@@ -1,0 +1,101 @@
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FaChevronLeft, FaHome } from 'react-icons/fa';
+
+const careerNavLinks = [
+    { name: 'Job Explorer', href: '/careers' },
+    { name: 'AI Resume', href: '/careers/resume-builder' },
+    { name: 'Skill Gap', href: '/careers/skill-analysis' },
+    { name: 'Applications', href: '/careers/applications' },
+    { name: 'Market Intel', href: '/careers/market-intelligence' }
+];
+
+const CareerSubNavbar = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [isSticky, setIsSticky] = useState(false);
+
+    const getBreadcrumb = () => {
+        const path = location.pathname;
+        if (path === '/careers') return 'Overview';
+        const link = careerNavLinks.find(l => l.href === path);
+        return link ? link.name : '';
+    };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsSticky(window.scrollY > 80);
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    return (
+        <div className={`${isSticky ? 'fixed top-16' : 'relative'} left-0 right-0 z-40 transition-all duration-300 w-full`}>
+            <div className={`bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm ${isSticky ? 'py-1' : 'py-2'}`}>
+                <div className="max-w-7xl mx-auto px-4 md:px-8">
+                    <div className="flex items-center gap-2 text-[8px] font-bold uppercase tracking-widest text-gray-400 mb-1">
+                        <Link to="/" className="hover:text-[#1e3a8a]">Home</Link>
+                        <span>/</span>
+                        <Link to="/careers" className="hover:text-[#1e3a8a]">Careers</Link>
+                        {location.pathname !== '/careers' && (
+                            <>
+                                <span>/</span>
+                                <span className="text-[#1e3a8a]">{getBreadcrumb()}</span>
+                            </>
+                        )}
+                    </div>
+
+                    <div className="flex items-center justify-between h-10 gap-2">
+                        <div className="flex items-center gap-4">
+                            <button
+                                onClick={() => navigate('/careers')}
+                                className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-[#1e3a8a] hover:text-[#FF9933] transition-colors group"
+                            >
+                                <FaChevronLeft className="group-hover:-translate-x-0.5 transition-transform" />
+                                <span>Go Back</span>
+                            </button>
+                            <Link to="/" className="text-gray-400 hover:text-[#1e3a8a] transition-colors">
+                                <FaHome size={14} />
+                            </Link>
+                        </div>
+
+                        <div className="flex-1 flex items-center justify-center gap-2 md:gap-6 overflow-x-auto no-scrollbar scroll-smooth px-4">
+                            {careerNavLinks.map((link) => {
+                                const isActive = location.pathname === link.href;
+                                return (
+                                    <Link
+                                        key={link.name}
+                                        to={link.href}
+                                        className={`relative text-[10px] font-black uppercase tracking-widest whitespace-nowrap transition-all duration-300 px-3 py-1.5 rounded-md ${isActive
+                                            ? 'text-[#1e3a8a] bg-[#1e3a8a]/5'
+                                            : 'text-gray-400 hover:text-gray-900 border border-transparent hover:border-gray-100'
+                                            }`}
+                                    >
+                                        {link.name}
+                                        {isActive && (
+                                            <motion.div
+                                                layoutId="careerActiveLine"
+                                                className="absolute bottom-0 left-2 right-2 h-0.5 bg-[#1e3a8a]"
+                                                transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                                            />
+                                        )}
+                                    </Link>
+                                );
+                            })}
+                        </div>
+
+                        <div className="hidden lg:flex items-center gap-1 opacity-40 grayscale group hover:grayscale-0 hover:opacity-100 transition-all cursor-default">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#FF9933]"></div>
+                            <div className="w-1.5 h-1.5 rounded-full bg-white border border-gray-200"></div>
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#138808]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default CareerSubNavbar;
