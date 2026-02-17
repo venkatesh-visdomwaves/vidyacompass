@@ -24,6 +24,12 @@ import Applications from './pages/careers/Applications';
 import SkillAnalysis from './pages/careers/SkillAnalysis';
 import MarketIntelligence from './pages/careers/MarketIntelligence';
 
+// Abroad Ecosystem Pages
+import AbroadPage from './pages/abroad/AbroadPage';
+import CountryDetailPage from './pages/abroad/CountryDetailPage';
+import DocumentStorage from './pages/abroad/DocumentStorage';
+import IntelligencePage from './pages/abroad/IntelligencePage';
+
 import Footer from './components/Footer/Footer';
 import AICompanion from './components/Companion/AICompanion';
 import AuthModal from './components/Auth/AuthModal';
@@ -76,6 +82,12 @@ const App = () => {
             <Route path="/careers/applications" element={<Applications />} />
             <Route path="/careers/skill-analysis" element={<SkillAnalysis />} />
             <Route path="/careers/market-intelligence" element={<MarketIntelligence />} />
+
+            {/* Abroad Routes */}
+            <Route path="/abroad" element={<AbroadPage />} />
+            <Route path="/abroad/:country" element={<CountryDetailPage />} />
+            <Route path="/abroad/documents" element={<DocumentStorage />} />
+            <Route path="/intelligence" element={<IntelligencePage />} />
 
             <Route path="*" element={<HomePage onOpenAuth={openAuth} />} />
 

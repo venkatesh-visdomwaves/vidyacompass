@@ -29,6 +29,12 @@ const navLinks = [
         hasMegaMenu: true
     },
     {
+        name: 'Go Abroad',
+        href: '/abroad',
+        isRoute: true,
+        hasMegaMenu: true
+    },
+    {
         name: 'Students',
         href: '/students',
         isRoute: true,
@@ -57,6 +63,14 @@ const careerColumns = [
     { title: 'Skill Gap', href: '/careers/skill-analysis', icon: <FaBrain />, color: 'text-[#FF9933]', desc: 'Neural Audit' },
     { title: 'Applications', href: '/careers/applications', icon: <FaPaperPlane />, color: 'text-[#1e3a8a]', desc: 'Live Tracker' },
     { title: 'Market Intel', href: '/careers/market-intelligence', icon: <FaChartBar />, color: 'text-[#138808]', desc: 'Salary Data' },
+];
+
+const abroadColumns = [
+    { title: 'Global Dashboard', href: '/abroad', icon: <FaGlobeAmericas />, color: 'text-[#138808]', desc: 'World Overview' },
+    { title: 'Data Intelligence', href: '/intelligence', icon: <FaChartBar />, color: 'text-[#1e3a8a]', desc: 'Market Data' },
+    { title: 'Document Vault', href: '/abroad/documents', icon: <FaFileAlt />, color: 'text-[#FF9933]', desc: 'Secure Storage' },
+    { title: 'Study USA', href: '/abroad/usa', icon: <span className="text-xl">🇺🇸</span>, color: 'text-[#FF9933]', desc: 'STEM Power' },
+    { title: 'Study Canada', href: '/abroad/canada', icon: <span className="text-xl">🇨🇦</span>, color: 'text-[#FF9933]', desc: 'PR Pathways' },
 ];
 
 
@@ -160,24 +174,25 @@ const Navbar = ({ onOpenAuth }) => {
                                                     <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-8">
                                                         {(link.name === 'Students' ? studentColumns :
                                                             link.name === 'Parents' ? parentColumns :
-                                                                careerColumns).map((col, i) => (
-                                                                    <Link
-                                                                        key={i}
-                                                                        to={col.href}
-                                                                        onClick={() => setActiveMegaMenu(null)}
-                                                                        className="flex flex-col items-center text-center group/col p-6 rounded-[2rem] hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100"
-                                                                    >
-                                                                        <div className={`w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center text-2xl mb-6 group-hover/col:scale-110 group-hover/col:bg-gray-900 group-hover/col:text-white transition-all ${col.color}`}>
-                                                                            {col.icon}
-                                                                        </div>
-                                                                        <h4 className="text-xs font-black text-gray-900 group-hover/col:text-[#138808] transition-colors leading-tight uppercase tracking-widest mb-2 font-serif">
-                                                                            {col.title}
-                                                                        </h4>
-                                                                        <p className="text-[10px] text-gray-400 font-medium group-hover/col:text-gray-500 transition-colors">
-                                                                            {col.desc}
-                                                                        </p>
-                                                                    </Link>
-                                                                ))}
+                                                                link.name === 'Go Abroad' ? abroadColumns :
+                                                                    careerColumns).map((col, i) => (
+                                                                        <Link
+                                                                            key={i}
+                                                                            to={col.href}
+                                                                            onClick={() => setActiveMegaMenu(null)}
+                                                                            className="flex flex-col items-center text-center group/col p-6 rounded-[2rem] hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100"
+                                                                        >
+                                                                            <div className={`w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center text-2xl mb-6 group-hover/col:scale-110 group-hover/col:bg-gray-900 group-hover/col:text-white transition-all ${col.color}`}>
+                                                                                {col.icon}
+                                                                            </div>
+                                                                            <h4 className="text-xs font-black text-gray-900 group-hover/col:text-[#138808] transition-colors leading-tight uppercase tracking-widest mb-2 font-serif">
+                                                                                {col.title}
+                                                                            </h4>
+                                                                            <p className="text-[10px] text-gray-400 font-medium group-hover/col:text-gray-500 transition-colors">
+                                                                                {col.desc}
+                                                                            </p>
+                                                                        </Link>
+                                                                    ))}
                                                     </div>
                                                     <div className="mt-10 pt-8 border-t border-gray-100 flex justify-between items-center px-4">
                                                         <span className="text-[9px] font-black uppercase tracking-[0.3em] text-gray-300">Vidya Compass Student Ecosystem</span>
@@ -250,16 +265,17 @@ const Navbar = ({ onOpenAuth }) => {
                                         <div className="pl-6 mt-4 grid grid-cols-1 gap-3">
                                             {(link.name === 'Students' ? studentColumns :
                                                 link.name === 'Parents' ? parentColumns :
-                                                    careerColumns).map((col, i) => (
-                                                        <button
-                                                            key={i}
-                                                            onClick={() => handleNavClick(col)}
-                                                            className="flex items-center gap-3 w-full text-left py-2 text-[10px] font-bold text-gray-500 hover:text-white uppercase tracking-widest"
-                                                        >
-                                                            <span className={col.color}>{col.icon}</span>
-                                                            {col.title}
-                                                        </button>
-                                                    ))}
+                                                    link.name === 'Go Abroad' ? abroadColumns :
+                                                        careerColumns).map((col, i) => (
+                                                            <button
+                                                                key={i}
+                                                                onClick={() => handleNavClick(col)}
+                                                                className="flex items-center gap-3 w-full text-left py-2 text-[10px] font-bold text-gray-500 hover:text-white uppercase tracking-widest"
+                                                            >
+                                                                <span className={col.color}>{col.icon}</span>
+                                                                {col.title}
+                                                            </button>
+                                                        ))}
                                         </div>
                                     )}
                                 </div>
