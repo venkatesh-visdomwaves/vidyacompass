@@ -3,9 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     FaBars, FaTimes, FaChevronDown, FaCompass, FaGlobeAmericas,
     FaRoute, FaWallet, FaBrain, FaArrowRight, FaChartPie,
-    FaShieldAlt, FaComments, FaFileAlt, FaPaperPlane, FaBriefcase, FaChartBar
+    FaShieldAlt, FaComments, FaFileAlt, FaPaperPlane, FaBriefcase, FaChartBar,
+    FaSignOutAlt
 } from 'react-icons/fa';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import VidyaLogo from './VidyaLogo';
 import './Navbar.css';
 
@@ -78,6 +80,7 @@ const Navbar = ({ onOpenAuth }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeMegaMenu, setActiveMegaMenu] = useState(null);
+    const { logout } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -229,6 +232,13 @@ const Navbar = ({ onOpenAuth }) => {
                             >
                                 <span className="text-[10px] font-black uppercase tracking-widest">Account</span>
                             </button>
+                            <button
+                                onClick={() => logout()}
+                                className="flex items-center gap-2 p-2 rounded-full border border-red-500/50 bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all duration-300 group"
+                                title="Lock Website"
+                            >
+                                <FaSignOutAlt className="text-sm" />
+                            </button>
                         </div>
                     </div>
 
@@ -281,15 +291,26 @@ const Navbar = ({ onOpenAuth }) => {
                                 </div>
                             ))}
                             <div className="pt-8">
-                                <button
-                                    onClick={() => {
-                                        setIsMobileMenuOpen(false);
-                                        onOpenAuth('signin');
-                                    }}
-                                    className="w-full px-6 py-3.5 rounded-full border border-[#FFBF00] bg-[#1a1a1a] text-[#FFBF00] font-black text-[10px] uppercase tracking-widest flex items-center justify-center"
-                                >
-                                    Account
-                                </button>
+                                <div className="flex flex-col gap-3">
+                                    <button
+                                        onClick={() => {
+                                            setIsMobileMenuOpen(false);
+                                            onOpenAuth('signin');
+                                        }}
+                                        className="w-full px-6 py-3.5 rounded-full border border-[#FFBF00] bg-[#1a1a1a] text-[#FFBF00] font-black text-[10px] uppercase tracking-widest flex items-center justify-center"
+                                    >
+                                        Account
+                                    </button>
+                                    <button
+                                        onClick={() => {
+                                            setIsMobileMenuOpen(false);
+                                            logout();
+                                        }}
+                                        className="w-full px-6 py-3.5 rounded-full border border-red-500/50 bg-red-500/10 text-red-500 font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2"
+                                    >
+                                        <FaSignOutAlt /> Lock Website
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </motion.div>

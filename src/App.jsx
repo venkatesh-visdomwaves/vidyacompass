@@ -35,6 +35,9 @@ import AICompanion from './components/Companion/AICompanion';
 import AuthModal from './components/Auth/AuthModal';
 import './App.css';
 
+import ProtectedRoute from './components/AuthGate/ProtectedRoute';
+import LoginPage from './pages/LoginPage';
+
 
 /**
  * Main App Component
@@ -55,50 +58,55 @@ const App = () => {
     <BrowserRouter>
       <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-primary-100 selection:text-primary-700">
 
-        {/* 1. Global Navigation Bar */}
-        <Navbar onOpenAuth={openAuth} />
+        <Routes>
+          {/* Public Login Route */}
+          <Route path="/login" element={<LoginPage />} />
 
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage onOpenAuth={openAuth} />} />
-            <Route path="/how-it-works" element={<HowItWorksPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/platform" element={<PlatformPage />} />
-            <Route path="/careers" element={<CareersPage />} />
-            <Route path="/parents" element={<ParentsPage />} />
-            <Route path="/students" element={<StudentsPage />} />
-            <Route path="/students/career-discovery" element={<CareerDiscovery />} />
-            <Route path="/students/global-explorer" element={<GlobalExplorer />} />
-            <Route path="/students/roadmap" element={<Roadmap />} />
-            <Route path="/students/financial-planning" element={<FinancialPlanning />} />
-            <Route path="/students/career-intelligence" element={<CareerIntelligence />} />
-            <Route path="/parents/dashboard" element={<ProgressDashboard />} />
-            <Route path="/parents/financial-support" element={<FinancialSupport />} />
-            <Route path="/parents/risk-safety" element={<RiskSafety />} />
-            <Route path="/parents/expert-guidance" element={<ExpertGuidance />} />
+          {/* Protected Routes */}
+          <Route path="/*" element={
+            <ProtectedRoute>
+              <>
+                <Navbar onOpenAuth={openAuth} />
+                <main>
+                  <Routes>
+                    <Route path="/" element={<HomePage onOpenAuth={openAuth} />} />
+                    <Route path="/how-it-works" element={<HowItWorksPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
+                    <Route path="/platform" element={<PlatformPage />} />
+                    <Route path="/careers" element={<CareersPage />} />
+                    <Route path="/parents" element={<ParentsPage />} />
+                    <Route path="/students" element={<StudentsPage />} />
+                    <Route path="/students/career-discovery" element={<CareerDiscovery />} />
+                    <Route path="/students/global-explorer" element={<GlobalExplorer />} />
+                    <Route path="/students/roadmap" element={<Roadmap />} />
+                    <Route path="/students/financial-planning" element={<FinancialPlanning />} />
+                    <Route path="/students/career-intelligence" element={<CareerIntelligence />} />
+                    <Route path="/parents/dashboard" element={<ProgressDashboard />} />
+                    <Route path="/parents/financial-support" element={<FinancialSupport />} />
+                    <Route path="/parents/risk-safety" element={<RiskSafety />} />
+                    <Route path="/parents/expert-guidance" element={<ExpertGuidance />} />
 
-            {/* Career Sub-routes */}
-            <Route path="/careers/resume-builder" element={<ResumeBuilder />} />
-            <Route path="/careers/applications" element={<Applications />} />
-            <Route path="/careers/skill-analysis" element={<SkillAnalysis />} />
-            <Route path="/careers/market-intelligence" element={<MarketIntelligence />} />
+                    {/* Career Sub-routes */}
+                    <Route path="/careers/resume-builder" element={<ResumeBuilder />} />
+                    <Route path="/careers/applications" element={<Applications />} />
+                    <Route path="/careers/skill-analysis" element={<SkillAnalysis />} />
+                    <Route path="/careers/market-intelligence" element={<MarketIntelligence />} />
 
-            {/* Abroad Routes */}
-            <Route path="/abroad" element={<AbroadPage />} />
-            <Route path="/abroad/:country" element={<CountryDetailPage />} />
-            <Route path="/abroad/documents" element={<DocumentStorage />} />
-            <Route path="/intelligence" element={<IntelligencePage />} />
+                    {/* Abroad Routes */}
+                    <Route path="/abroad" element={<AbroadPage />} />
+                    <Route path="/abroad/:country" element={<CountryDetailPage />} />
+                    <Route path="/abroad/documents" element={<DocumentStorage />} />
+                    <Route path="/intelligence" element={<IntelligencePage />} />
 
-            <Route path="*" element={<HomePage onOpenAuth={openAuth} />} />
-
-          </Routes>
-        </main>
-
-        {/* 8. Global Site Footer */}
-        <Footer />
-
-        {/* AI Voice Navigator & Companion */}
-        <AICompanion />
+                    <Route path="*" element={<HomePage onOpenAuth={openAuth} />} />
+                  </Routes>
+                </main>
+                <Footer />
+                <AICompanion />
+              </>
+            </ProtectedRoute>
+          } />
+        </Routes>
 
         {/* Global Auth Modal */}
         <AuthModal
