@@ -120,7 +120,7 @@ const ContactSection = () => {
                             <div>
                                 <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-0.5 md:mb-1">Call Us</h3>
                                 <p className="text-gray-600 text-sm md:text-base">+91 79977 55155</p>
-                                <p className="text-gray-600 text-xs md:text-sm">Mon-Fri: 9AM - 6PM IST</p>
+                                <p className="text-gray-600 text-xs md:text-sm">Mon-sat: 9AM - 6PM IST</p>
                             </div>
                         </div>
 
