@@ -7,8 +7,8 @@ export const AuthProvider = ({ children }) => {
         return localStorage.getItem('vidya_gate_auth') === 'true';
     });
 
-    const login = (password) => {
-        if (password === 'vidyacompass123') {
+    const login = (email, password) => {
+        if (email === 'visdomwaves@gmail.com' && password === 'india@1947') {
             localStorage.setItem('vidya_gate_auth', 'true');
             setIsAuthenticated(true);
             return true;

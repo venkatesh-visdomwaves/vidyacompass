@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FaMobileAlt, FaEnvelope, FaLock, FaSpinner, FaCheckCircle, FaExclamationCircle, FaEye, FaEyeSlash, FaCompass } from 'react-icons/fa';
+import { FaEnvelope, FaLock, FaSpinner, FaCheckCircle, FaExclamationCircle, FaEye, FaEyeSlash } from 'react-icons/fa';
 import VidyaLogo from '../components/Navbar/VidyaLogo';
 import './LoginPage.css';
 
@@ -21,7 +21,6 @@ const LoginPage = () => {
     const from = location.state?.from?.pathname || "/";
 
     const [formData, setFormData] = useState({
-        mobile: '',
         email: '',
         password: ''
     });
@@ -35,17 +34,12 @@ const LoginPage = () => {
     const validate = () => {
         const newErrors = {};
 
-        // Mobile validation (10 digits)
-        if (!/^\d{10}$/.test(formData.mobile)) {
-            newErrors.mobile = "Mobile number must be exactly 10 digits";
+        // Email validation — must match the fixed authorized email
+        if (formData.email !== 'visdomwaves@gmail.com') {
+            newErrors.email = "Unauthorized email address";
         }
 
-        // Email validation
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            newErrors.email = "Please enter a valid email address";
-        }
-
-        // Password validation
+        // Password validation — must match the fixed password
         if (formData.password !== 'india@1947') {
             newErrors.password = "Incorrect access password";
         }
@@ -63,7 +57,7 @@ const LoginPage = () => {
         await new Promise(resolve => setTimeout(resolve, 1500));
 
         if (validate()) {
-            const success = login(formData.password);
+            const success = login(formData.email, formData.password);
             if (success) {
                 setStatus('success');
                 setTimeout(() => navigate(from, { replace: true }), 1000);
@@ -166,28 +160,6 @@ const LoginPage = () => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-8">
-                    {/* Mobile Field */}
-                    <div className="relative">
-                        <div className="relative group">
-                            <FaMobileAlt className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors duration-300 ${formData.mobile ? 'text-blue-400' : 'text-white/30'}`} />
-                            <input
-                                id="mobile"
-                                type="tel"
-                                className={`w-full thick-input pl-12 pr-4 py-4 rounded-xl input-glass text-sm peer placeholder-transparent ${errors.mobile ? 'border-red-500/50' : ''}`}
-                                value={formData.mobile}
-                                onChange={(e) => setFormData({ ...formData, mobile: e.target.value.replace(/\D/g, '').slice(0, 10) })}
-                                placeholder="Mobile Number"
-                                required
-                            />
-                            <label
-                                htmlFor="mobile"
-                                className="absolute left-12 top-0 -translate-y-7 text-[10px] font-bold text-blue-400 uppercase tracking-widest transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-white/30 peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:left-12 peer-focus:top-0 peer-focus:-translate-y-7 peer-focus:text-[10px] peer-focus:text-blue-400 pointer-events-none"
-                            >
-                                Mobile Number
-                            </label>
-                        </div>
-                        {errors.mobile && <p className="absolute -bottom-5 left-1 text-red-400 text-[9px] flex items-center gap-1"><FaExclamationCircle className="text-[10px]" /> {errors.mobile}</p>}
-                    </div>
 
                     {/* Email Field */}
                     <div className="relative">
