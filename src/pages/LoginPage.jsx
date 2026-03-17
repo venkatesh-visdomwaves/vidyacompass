@@ -46,7 +46,7 @@ const LoginPage = () => {
         }
 
         // Password validation
-        if (formData.password !== 'vidyacompass123') {
+        if (formData.password !== 'india@1947') {
             newErrors.password = "Incorrect access password";
         }
 
